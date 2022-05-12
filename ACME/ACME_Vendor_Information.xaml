@@ -1,0 +1,244 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Vendor_Information" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="out_TaxID" Type="OutArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1208,956</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ACME_Vendor_Information_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="32">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.CV</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>UiPath.CV.Activities</x:String>
+      <x:String>UiPath.CV.Activities.Interfaces</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ACME_Vendor_Information" sap:VirtualizedContainerService.HintSize="552,891" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="510,799" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f933559242aeda597c56b9878cd20c06" Selector="&lt;html app='chrome.exe' title='ACME System 1 - *' /&gt;">
+      <ui:BrowserScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,653" sap2010:WorkflowViewState.IdRef="Sequence_2">
+            <sap:WorkflowViewStateService.ViewState>
+              <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              </scg:Dictionary>
+            </sap:WorkflowViewStateService.ViewState>
+            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="434,561" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+              <p:CVScope.Body>
+                <ActivityAction x:TypeArguments="x:Object">
+                  <ActivityAction.Argument>
+                    <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
+                  </ActivityAction.Argument>
+                  <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                    <Sequence.Variables>
+                      <Variable x:TypeArguments="x:String" Name="TaxIDInfo" />
+                    </Sequence.Variables>
+                    <p:CvGetTextWithDescriptor Descriptor="[&quot;Target: AnyText (161,285,69,13)&quot; +&#xD;&#xA;&quot;Anchor: Text 'TaxID:' (115,285,43,13)&quot;]" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DesignTimeScaleFactor="1" DisplayName="CV Get Text - Any Text" sap:VirtualizedContainerService.HintSize="400,166" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_2" InformativeScreenshot="8f4d053462d845f311711a682981b70c" RefreshBefore="True" Result="[TaxIDInfo]" Version="V5">
+                      <p:CvGetTextWithDescriptor.DesignTimeDescriptor>
+                        <uc:CvDescriptor Id="9744e060-3513-49c0-b0a5-8475267104e6">
+                          <uc:CvDescriptor.Anchors>
+                            <x:Array Type="uc:CvElementDescriptor">
+                              <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="115, 285, 43, 13" ElementType="Text" Text="TaxID:" />
+                            </x:Array>
+                          </uc:CvDescriptor.Anchors>
+                          <uc:CvDescriptor.Target>
+                            <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="161, 285, 69, 13" ElementType="AnyText" />
+                          </uc:CvDescriptor.Target>
+                        </uc:CvDescriptor>
+                      </p:CvGetTextWithDescriptor.DesignTimeDescriptor>
+                    </p:CvGetTextWithDescriptor>
+                    <Assign sap:VirtualizedContainerService.HintSize="400,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+                      <Assign.To>
+                        <OutArgument x:TypeArguments="x:String">[out_TaxID]</OutArgument>
+                      </Assign.To>
+                      <Assign.Value>
+                        <InArgument x:TypeArguments="x:String">[TaxIDInfo]</InArgument>
+                      </Assign.Value>
+                    </Assign>
+                  </Sequence>
+                </ActivityAction>
+              </p:CVScope.Body>
+              <p:CVScope.DesignTimeCacheContainer>
+                <uc:CvCacheContainer>
+                  <uc:CvCacheContainer.Caches>
+                    <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
+                      <uc:CVCache DisplayName="Screen CV Get Text - '' (Main)" Id="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" InformativeScreenshot="fca80f2e82418255a4de27237df48c81" LogicalPosition="375, 121" OcrText="Work Items - Work Item Details Home / Work Items Work Item Details Generate Yearly Report for Vendor Vendor Information Work Item Details TaxID: RO254678 WIID: 82792773 Name: Softload Export Type: Generate Yearly Report for Vendor Address: Strada Lunga 189 Status: Open City: Brasov, Romania Date: 2021-05-05 Update Work Item Copyright © 2022 ACME Systems" Position="375, 121" ScreenshotGuid="67168873-3e8c-4356-bf85-9d3227f10b57" ServerVersion="1">
+                        <uc:CVCache.CvAnchorRelations>
+                          <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
+                        </uc:CVCache.CvAnchorRelations>
+                        <uc:CVCache.CvUiElements>
+                          <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="16">
+                            <uc:CvElementInfo Category="Icon" Region="529, 399, 20, 19" />
+                            <uc:CvElementInfo Category="Button" Region="518, 392, 158, 36" />
+                            <uc:CvElementInfo Category="Cell" Region="130, 183, 909, 44" />
+                            <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="57, 472, 1053, 51" />
+                            <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="25, 110, 1116, 38" />
+                            <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="78, 186, 1023, 41" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="86, 279, 416, 22" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="84, 300, 429, 20" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="88, 231, 415, 45" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="84, 321, 410, 20" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="82, 341, 422, 19" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="56, 520, 1028, 90" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="493, 236, 578, 39" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="96, 445, 946, 75" />
+                            <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="88, 105, 1070, 38" />
+                          </scg:List>
+                        </uc:CVCache.CvUiElements>
+                        <uc:CVCache.OcrTexts>
+                          <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="64">
+                            <uc:OcrTextInfo Region="13, 43, 87, 31" Text="Work" />
+                            <uc:OcrTextInfo Region="109, 44, 87, 30" Text="Items" />
+                            <uc:OcrTextInfo Region="205, 49, 14, 23" Text="-" />
+                            <uc:OcrTextInfo Region="226, 43, 87, 31" Text="Work" />
+                            <uc:OcrTextInfo Region="322, 43, 70, 31" Text="Item" />
+                            <uc:OcrTextInfo Region="402, 44, 110, 30" Text="Details" />
+                            <uc:OcrTextInfo Region="29, 121, 39, 13" Text="Home" />
+                            <uc:OcrTextInfo Region="75, 121, 7, 13" Text="/" />
+                            <uc:OcrTextInfo Region="87, 121, 36, 13" Text="Work" />
+                            <uc:OcrTextInfo Region="125, 121, 35, 13" Text="Items" />
+                            <uc:OcrTextInfo Region="180, 121, 34, 13" Text="Work" />
+                            <uc:OcrTextInfo Region="216, 121, 29, 13" Text="Item" />
+                            <uc:OcrTextInfo Region="248, 121, 44, 13" Text="Details" />
+                            <uc:OcrTextInfo Region="100, 200, 60, 13" Text="Generate" />
+                            <uc:OcrTextInfo Region="161, 200, 40, 16" Text="Yearly" />
+                            <uc:OcrTextInfo Region="204, 200, 44, 16" Text="Report" />
+                            <uc:OcrTextInfo Region="250, 200, 19, 13" Text="for" />
+                            <uc:OcrTextInfo Region="270, 200, 47, 13" Text="Vendor" />
+                            <uc:OcrTextInfo Region="114, 253, 61, 16" Text="Vendor" />
+                            <uc:OcrTextInfo Region="177, 252, 91, 17" Text="Information" />
+                            <uc:OcrTextInfo Region="518, 253, 44, 16" Text="Work" />
+                            <uc:OcrTextInfo Region="565, 253, 36, 16" Text="Item" />
+                            <uc:OcrTextInfo Region="605, 253, 57, 16" Text="Details" />
+                            <uc:OcrTextInfo Region="115, 285, 43, 13" Text="TaxID:" />
+                            <uc:OcrTextInfo Region="161, 285, 69, 13" Text="RO254678" />
+                            <uc:OcrTextInfo Region="517, 285, 38, 13" Text="WIID:" />
+                            <uc:OcrTextInfo Region="558, 285, 63, 13" Text="82792773" />
+                            <uc:OcrTextInfo Region="115, 305, 44, 13" Text="Name:" />
+                            <uc:OcrTextInfo Region="162, 305, 52, 13" Text="Softload" />
+                            <uc:OcrTextInfo Region="217, 305, 42, 16" Text="Export" />
+                            <uc:OcrTextInfo Region="520, 305, 35, 16" Text="Type:" />
+                            <uc:OcrTextInfo Region="559, 305, 59, 13" Text="Generate" />
+                            <uc:OcrTextInfo Region="620, 304, 40, 17" Text="Yearly" />
+                            <uc:OcrTextInfo Region="663, 305, 44, 16" Text="Report" />
+                            <uc:OcrTextInfo Region="708, 305, 19, 13" Text="for" />
+                            <uc:OcrTextInfo Region="728, 305, 47, 13" Text="Vendor" />
+                            <uc:OcrTextInfo Region="115, 325, 62, 13" Text="Address:" />
+                            <uc:OcrTextInfo Region="179, 325, 43, 13" Text="Strada" />
+                            <uc:OcrTextInfo Region="225, 325, 40, 16" Text="Lunga" />
+                            <uc:OcrTextInfo Region="267, 325, 25, 13" Text="189" />
+                            <uc:OcrTextInfo Region="519, 324, 47, 14" Text="Status:" />
+                            <uc:OcrTextInfo Region="570, 326, 35, 15" Text="Open" />
+                            <uc:OcrTextInfo Region="115, 345, 32, 16" Text="City:" />
+                            <uc:OcrTextInfo Region="150, 345, 47, 15" Text="Brasov," />
+                            <uc:OcrTextInfo Region="200, 345, 58, 13" Text="Romania" />
+                            <uc:OcrTextInfo Region="518, 345, 36, 13" Text="Date:" />
+                            <uc:OcrTextInfo Region="556, 345, 75, 13" Text="2021-05-05" />
+                            <uc:OcrTextInfo Region="549, 402, 47, 16" Text="Update" />
+                            <uc:OcrTextInfo Region="598, 402, 35, 13" Text="Work" />
+                            <uc:OcrTextInfo Region="635, 403, 28, 12" Text="Item" />
+                            <uc:OcrTextInfo Region="84, 546, 61, 16" Text="Copyright" />
+                            <uc:OcrTextInfo Region="147, 546, 13, 13" Text="©" />
+                            <uc:OcrTextInfo Region="161, 546, 34, 13" Text="2022" />
+                            <uc:OcrTextInfo Region="196, 546, 42, 13" Text="ACME" />
+                            <uc:OcrTextInfo Region="240, 546, 55, 16" Text="Systems" />
+                          </scg:List>
+                        </uc:CVCache.OcrTexts>
+                      </uc:CVCache>
+                    </scg:List>
+                  </uc:CvCacheContainer.Caches>
+                </uc:CvCacheContainer>
+              </p:CVScope.DesignTimeCacheContainer>
+              <p:CVScope.OCREngine>
+                <ActivityFunc x:TypeArguments="sd:Image, scg:IEnumerable(scg:KeyValuePair(sd:Rectangle, x:String))">
+                  <ActivityFunc.Argument>
+                    <DelegateInArgument x:TypeArguments="sd:Image" Name="Image" />
+                  </ActivityFunc.Argument>
+                  <p1:UiPathScreenOCR ApiKey="{x:Null}" Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ComputeSkewAngle="False" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="UiPathScreenOCR_1" Image="[Image]" Language="en" Profile="Screen" Scale="1" Timeout="100000" />
+                </ActivityFunc>
+              </p:CVScope.OCREngine>
+              <p:CVScope.Target>
+                <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="ab355f6a-8e05-4e8a-8099-243e2818220c" InformativeScreenshot="7016cbd8d3a43be0a2e91d9fb4afe209" Selector="&lt;webctrl css-selector='body&amp;gt;div' tag='DIV' /&gt;" WaitForReady="INTERACTIVE">
+                  <ui:Target.TimeoutMS>
+                    <InArgument x:TypeArguments="x:Int32" />
+                  </ui:Target.TimeoutMS>
+                </ui:Target>
+              </p:CVScope.Target>
+              <p:CVScope.UseLocalServer>
+                <InArgument x:TypeArguments="x:Boolean" />
+              </p:CVScope.UseLocalServer>
+            </p:CVScope>
+          </Sequence>
+        </ActivityAction>
+      </ui:BrowserScope.Body>
+    </ui:BrowserScope>
+  </Sequence>
+</Activity>

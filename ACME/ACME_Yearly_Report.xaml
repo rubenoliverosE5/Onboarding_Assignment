@@ -1,0 +1,891 @@
+<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Yearly_Report" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+  <x:Members>
+    <x:Property Name="in_Year" Type="InArgument(x:String)" />
+    <x:Property Name="in_TaxID" Type="InArgument(x:String)" />
+    <x:Property Name="out_YearlyReportPath" Type="OutArgument(x:String)" />
+    <x:Property Name="in_ReportsDownloadPath" Type="InArgument(x:String)" />
+  </x:Members>
+  <mva:VisualBasic.Settings>
+    <x:Null />
+  </mva:VisualBasic.Settings>
+  <sap:VirtualizedContainerService.HintSize>1199,3514</sap:VirtualizedContainerService.HintSize>
+  <sap2010:WorkflowViewState.IdRef>ACME_Yearly_Report_1</sap2010:WorkflowViewState.IdRef>
+  <TextExpression.NamespacesForImplementation>
+    <scg:List x:TypeArguments="x:String" Capacity="84">
+      <x:String>System.Activities</x:String>
+      <x:String>System.Activities.Statements</x:String>
+      <x:String>System.Activities.Expressions</x:String>
+      <x:String>System.Activities.Validation</x:String>
+      <x:String>System.Activities.XamlIntegration</x:String>
+      <x:String>Microsoft.VisualBasic</x:String>
+      <x:String>Microsoft.VisualBasic.Activities</x:String>
+      <x:String>System</x:String>
+      <x:String>System.Collections</x:String>
+      <x:String>System.Collections.Generic</x:String>
+      <x:String>System.Data</x:String>
+      <x:String>System.Diagnostics</x:String>
+      <x:String>System.Drawing</x:String>
+      <x:String>System.IO</x:String>
+      <x:String>System.Linq</x:String>
+      <x:String>System.Net.Mail</x:String>
+      <x:String>System.Xml</x:String>
+      <x:String>System.Xml.Linq</x:String>
+      <x:String>UiPath.Core</x:String>
+      <x:String>UiPath.Core.Activities</x:String>
+      <x:String>System.Windows.Markup</x:String>
+      <x:String>System.Reflection</x:String>
+      <x:String>System.Runtime.InteropServices</x:String>
+      <x:String>System.ComponentModel</x:String>
+      <x:String>System.Runtime.Serialization</x:String>
+      <x:String>System.Xml.Serialization</x:String>
+      <x:String>UiPath.UIAutomationCore.Contracts</x:String>
+      <x:String>UiPath.CV</x:String>
+      <x:String>UiPath.Shared.ObjectLibrary</x:String>
+      <x:String>System.Collections.ObjectModel</x:String>
+      <x:String>UiPath.CV.Activities</x:String>
+      <x:String>System.Activities.DynamicUpdate</x:String>
+      <x:String>UiPath.Shared.Activities</x:String>
+      <x:String>UiPath.CV.Activities.Interfaces</x:String>
+      <x:String>UiPath.UIAutomationNext.Enums</x:String>
+      <x:String>UiPath.UIAutomationNext.Activities</x:String>
+      <x:String>UiPath.Platform.ObjectLibrary</x:String>
+      <x:String>UiPath.CSV</x:String>
+      <x:String>UiPath.CSV.Activities</x:String>
+      <x:String>UiPath.Platform.ResourceHandling</x:String>
+      <x:String>UiPath.Excel</x:String>
+      <x:String>UiPath.Excel.Activities</x:String>
+      <x:String>UiPath.Vision.OCR</x:String>
+      <x:String>UiPath.OCR.Contracts</x:String>
+      <x:String>UiPath.OCR.Activities</x:String>
+      <x:String>UiPath.OCR.Contracts.Activities</x:String>
+    </scg:List>
+  </TextExpression.NamespacesForImplementation>
+  <TextExpression.ReferencesForImplementation>
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="78">
+      <AssemblyReference>System.Activities</AssemblyReference>
+      <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
+      <AssemblyReference>mscorlib</AssemblyReference>
+      <AssemblyReference>System.Data</AssemblyReference>
+      <AssemblyReference>System.Data.DataSetExtensions</AssemblyReference>
+      <AssemblyReference>System</AssemblyReference>
+      <AssemblyReference>System.Drawing</AssemblyReference>
+      <AssemblyReference>System.Core</AssemblyReference>
+      <AssemblyReference>System.Xml</AssemblyReference>
+      <AssemblyReference>System.Xml.Linq</AssemblyReference>
+      <AssemblyReference>PresentationFramework</AssemblyReference>
+      <AssemblyReference>WindowsBase</AssemblyReference>
+      <AssemblyReference>PresentationCore</AssemblyReference>
+      <AssemblyReference>System.Xaml</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UiAutomation.Activities</AssemblyReference>
+      <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.Data.Entity</AssemblyReference>
+      <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationCore</AssemblyReference>
+      <AssemblyReference>UiPath.CV</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.UIAutomationNext.Activities</AssemblyReference>
+      <AssemblyReference>UiPath.Platform</AssemblyReference>
+      <AssemblyReference>UiPath.Excel</AssemblyReference>
+      <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
+      <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
+      <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
+    </scg:List>
+  </TextExpression.ReferencesForImplementation>
+  <Sequence DisplayName="ACME_Yearly_Report" sap:VirtualizedContainerService.HintSize="1085,3449" sap2010:WorkflowViewState.IdRef="Sequence_1">
+    <Sequence.Variables>
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_YearlyReport" />
+      <Variable x:TypeArguments="s:String[]" Name="Months" />
+    </Sequence.Variables>
+    <sap:WorkflowViewStateService.ViewState>
+      <scg:Dictionary x:TypeArguments="x:String, x:Object">
+        <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+      </scg:Dictionary>
+    </sap:WorkflowViewStateService.ViewState>
+    <Assign sap:VirtualizedContainerService.HintSize="1043,60" sap2010:WorkflowViewState.IdRef="Assign_1">
+      <Assign.To>
+        <OutArgument x:TypeArguments="sd:DataTable">[dt_YearlyReport]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="1043,3002" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="78359c19a37b168ba1011c214f1ecdf4" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Download Monthly Report' /&gt;">
+      <ui:BrowserScope.Body>
+        <ActivityAction x:TypeArguments="x:Object">
+          <ActivityAction.Argument>
+            <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
+          </ActivityAction.Argument>
+          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="679b77a5-05a1-4ed8-91f4-ae2c44264a40" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="1009,2856" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+            <p:CVScope.Body>
+              <ActivityAction x:TypeArguments="x:Object">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
+                  <p:CvTypeIntoWithDescriptor DeselectAfter="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (461,290,482,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Vendor TaxID:' (459,269,94,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Type Into - InputBox" EmptyField="True" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvTypeIntoWithDescriptor_1" InformativeScreenshot="a0f3c79cf92718674f000b86c1934914" Text="[in_TaxID]" Version="V5">
+                    <p:CvTypeIntoWithDescriptor.DesignTimeDescriptor>
+                      <uc:CvDescriptor Id="6e1f8f2d-b69a-400f-a0a9-cf43bb871edb">
+                        <uc:CvDescriptor.Anchors>
+                          <x:Array Type="uc:CvElementDescriptor">
+                            <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="459, 269, 94, 13" ElementType="Text" Text="Vendor TaxID:" />
+                          </x:Array>
+                        </uc:CvDescriptor.Anchors>
+                        <uc:CvDescriptor.Target>
+                          <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="461, 290, 482, 36" ElementType="InputBox" />
+                        </uc:CvDescriptor.Target>
+                      </uc:CvDescriptor>
+                    </p:CvTypeIntoWithDescriptor.DesignTimeDescriptor>
+                    <p:CvTypeIntoWithDescriptor.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="2062e79c-7d0f-43bf-a92a-47187c0d1374">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </p:CvTypeIntoWithDescriptor.Target>
+                  </p:CvTypeIntoWithDescriptor>
+                  <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,432,223,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Year:' (458,412,36,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" EmptyField="False" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_1" InformativeScreenshot="a4ef647df98a59e9605ce9bb6ed601bf" Text="[in_Year]" Version="V5">
+                    <p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
+                      <uc:CvDescriptor Id="967c72f8-1883-4bfb-bb84-8e7cc0591309">
+                        <uc:CvDescriptor.Anchors>
+                          <x:Array Type="uc:CvElementDescriptor">
+                            <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="458, 412, 36, 13" ElementType="Text" Text="Year:" />
+                          </x:Array>
+                        </uc:CvDescriptor.Anchors>
+                        <uc:CvDescriptor.Target>
+                          <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="459, 432, 223, 36" ElementType="InputBox" />
+                        </uc:CvDescriptor.Target>
+                      </uc:CvDescriptor>
+                    </p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
+                    <p:CvSelectItemWithDescriptor.Target>
+                      <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="1d55628d-720a-48fb-80c1-40402def0817">
+                        <ui:Target.TimeoutMS>
+                          <InArgument x:TypeArguments="x:Int32" />
+                        </ui:Target.TimeoutMS>
+                        <ui:Target.WaitForReady>
+                          <InArgument x:TypeArguments="ui:WaitForReady" />
+                        </ui:Target.WaitForReady>
+                      </ui:Target>
+                    </p:CvSelectItemWithDescriptor.Target>
+                  </p:CvSelectItemWithDescriptor>
+                  <Assign sap:VirtualizedContainerService.HintSize="975,60" sap2010:WorkflowViewState.IdRef="Assign_2">
+                    <Assign.To>
+                      <OutArgument x:TypeArguments="s:String[]">[Months]</OutArgument>
+                    </Assign.To>
+                    <Assign.Value>
+                      <InArgument x:TypeArguments="s:String[]">[{"J", "F", "M", "A", "MM", "JJ", "JJJ", "AA", "S", "O", "N", "D"}]</InArgument>
+                    </Assign.Value>
+                  </Assign>
+                  <ui:ForEach x:TypeArguments="x:Object" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="975,2045" sap2010:WorkflowViewState.IdRef="ForEach`1_3" Values="[Months]">
+                    <ui:ForEach.Body>
+                      <ActivityAction x:TypeArguments="x:Object">
+                        <ActivityAction.Argument>
+                          <DelegateInArgument x:TypeArguments="x:Object" Name="month" />
+                        </ActivityAction.Argument>
+                        <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="939,1922" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                          <Sequence.Variables>
+                            <Variable x:TypeArguments="x:Boolean" Name="NoReportFound" />
+                            <Variable x:TypeArguments="x:String" Name="ReportFilePath" />
+                          </Sequence.Variables>
+                          <sap:WorkflowViewStateService.ViewState>
+                            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                            </scg:Dictionary>
+                          </sap:WorkflowViewStateService.ViewState>
+                          <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" EmptyField="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,364,221,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Month:' (459,343,47,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" sap:VirtualizedContainerService.HintSize="897,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_2" InformativeScreenshot="394b33a9c87bd234051ec335094ab816" Text="[month.ToString]" Version="V5">
+                            <p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
+                              <uc:CvDescriptor Id="e6bbeafb-2e8e-4748-82ae-f4695dd16131">
+                                <uc:CvDescriptor.Anchors>
+                                  <x:Array Type="uc:CvElementDescriptor">
+                                    <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="459, 343, 47, 13" ElementType="Text" Text="Month:" />
+                                  </x:Array>
+                                </uc:CvDescriptor.Anchors>
+                                <uc:CvDescriptor.Target>
+                                  <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="459, 364, 221, 36" ElementType="InputBox" />
+                                </uc:CvDescriptor.Target>
+                              </uc:CvDescriptor>
+                            </p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
+                            <p:CvSelectItemWithDescriptor.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="c8a51c02-751e-4476-9ff5-9ba6851edf44">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </p:CvSelectItemWithDescriptor.Target>
+                          </p:CvSelectItemWithDescriptor>
+                          <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Download Report' (472,493,111,16)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Copyright © 2022 ACME Systems' (459,611,211,16)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_1" InformativeScreenshot="5c1d7b5a86149371a06956832768f802" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
+                            <p:CvClickWithDescriptor.CursorPosition>
+                              <ui:CursorPosition Position="Center">
+                                <ui:CursorPosition.OffsetX>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetX>
+                                <ui:CursorPosition.OffsetY>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:CursorPosition.OffsetY>
+                              </ui:CursorPosition>
+                            </p:CvClickWithDescriptor.CursorPosition>
+                            <p:CvClickWithDescriptor.DesignTimeDescriptor>
+                              <uc:CvDescriptor Id="63b67605-5034-4f1c-a7d7-1c0aa0832499">
+                                <uc:CvDescriptor.Anchors>
+                                  <x:Array Type="uc:CvElementDescriptor">
+                                    <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="459, 611, 211, 16" ElementType="Text" Text="Copyright © 2022 ACME Systems" />
+                                  </x:Array>
+                                </uc:CvDescriptor.Anchors>
+                                <uc:CvDescriptor.Target>
+                                  <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="472, 493, 111, 16" ElementType="Text" Text="Download Report" />
+                                </uc:CvDescriptor.Target>
+                              </uc:CvDescriptor>
+                            </p:CvClickWithDescriptor.DesignTimeDescriptor>
+                            <p:CvClickWithDescriptor.Target>
+                              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="7097e1b6-561e-4408-b588-48c6da0c58f3">
+                                <ui:Target.TimeoutMS>
+                                  <InArgument x:TypeArguments="x:Int32" />
+                                </ui:Target.TimeoutMS>
+                                <ui:Target.WaitForReady>
+                                  <InArgument x:TypeArguments="ui:WaitForReady" />
+                                </ui:Target.WaitForReady>
+                              </ui:Target>
+                            </p:CvClickWithDescriptor.Target>
+                          </p:CvClickWithDescriptor>
+                          <p:CvElementExistsWithDescriptor Descriptor="[&quot;Target: Text 'No report found for this vendor / month / year that you have specified.' (751,45,408,16)&quot; +&#xD;&#xA;&quot;Anchor: Text 'acme-test.uipath.com says' (750,16,177,17)&quot;]" DesignTimeCacheId="a4209172-472a-46ed-970f-8d25893a0c3c" DesignTimeScaleFactor="1" DisplayName="CV Element Exists - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvElementExistsWithDescriptor_3" InformativeScreenshot="6f4de6065094839e94c4b8dd6f55f5ab" Result="[NoReportFound]" Version="V5">
+                            <p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
+                              <uc:CvDescriptor Id="09a34c26-d756-4ad0-94a0-92305d31a953">
+                                <uc:CvDescriptor.Anchors>
+                                  <x:Array Type="uc:CvElementDescriptor">
+                                    <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="750, 16, 177, 17" ElementType="Text" Text="acme-test.uipath.com says" />
+                                  </x:Array>
+                                </uc:CvDescriptor.Anchors>
+                                <uc:CvDescriptor.Target>
+                                  <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="751, 45, 408, 16" ElementType="Text" Text="No report found for this vendor / month / year that you have specified." />
+                                </uc:CvDescriptor.Target>
+                              </uc:CvDescriptor>
+                            </p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
+                          </p:CvElementExistsWithDescriptor>
+                          <If Condition="[NoReportFound]" sap:VirtualizedContainerService.HintSize="897,1254" sap2010:WorkflowViewState.IdRef="If_4">
+                            <If.Then>
+                              <Sequence sap:VirtualizedContainerService.HintSize="376,228" sap2010:WorkflowViewState.IdRef="Sequence_9">
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'OK' (1125,107,19,12)&quot;]" DesignTimeCacheId="a4209172-472a-46ed-970f-8d25893a0c3c" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="334,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_4" InformativeScreenshot="5d113825567743758cdab88c428d2b40" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
+                                  <p:CvClickWithDescriptor.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </p:CvClickWithDescriptor.CursorPosition>
+                                  <p:CvClickWithDescriptor.DesignTimeDescriptor>
+                                    <uc:CvDescriptor Id="1ce07e34-35aa-4d93-83c2-102bfbc597d3">
+                                      <uc:CvDescriptor.Target>
+                                        <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="1125, 107, 19, 12" ElementType="Text" Text="OK" />
+                                      </uc:CvDescriptor.Target>
+                                    </uc:CvDescriptor>
+                                  </p:CvClickWithDescriptor.DesignTimeDescriptor>
+                                  <p:CvClickWithDescriptor.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="8d4b32c6-d333-43cc-97c1-2fc17a4bbcc9">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </p:CvClickWithDescriptor.Target>
+                                </p:CvClickWithDescriptor>
+                              </Sequence>
+                            </If.Then>
+                            <If.Else>
+                              <Sequence sap:VirtualizedContainerService.HintSize="476,1097" sap2010:WorkflowViewState.IdRef="Sequence_10">
+                                <Sequence.Variables>
+                                  <Variable x:TypeArguments="sd:DataTable" Name="dt_MonthlyReport" />
+                                  <Variable x:TypeArguments="x:Boolean" Name="ReportFilePathExist" />
+                                </Sequence.Variables>
+                                <sap:WorkflowViewStateService.ViewState>
+                                  <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                                    <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                                  </scg:Dictionary>
+                                </sap:WorkflowViewStateService.ViewState>
+                                <Assign sap:VirtualizedContainerService.HintSize="434,60" sap2010:WorkflowViewState.IdRef="Assign_3">
+                                  <Assign.To>
+                                    <OutArgument x:TypeArguments="x:String">[ReportFilePath]</OutArgument>
+                                  </Assign.To>
+                                  <Assign.Value>
+                                    <InArgument x:TypeArguments="x:String">[path.Combine(Environment.CurrentDirectory, in_ReportsDownloadPath, "Report-" + in_TaxID + "-"+ in_Year + "-" + month.ToString + ".csv")]</InArgument>
+                                  </Assign.Value>
+                                </Assign>
+                                <p:CvTypeIntoWithDescriptor DeselectAfter="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (131,309,829,26)&quot; +&#xA;&quot;Anchor: Text 'File name:' (73,315,55,12)&quot;]" DesignTimeCacheId="0c739803-d252-41d4-a88c-7c0f2f01dc60" DesignTimeScaleFactor="1" DisplayName="CV Type Into - InputBox" EmptyField="True" sap:VirtualizedContainerService.HintSize="434,184" sap2010:WorkflowViewState.IdRef="CvTypeIntoWithDescriptor_2" InformativeScreenshot="6ebfab58f3060210b57d349475e2a4c1" Text="[ReportFilePath]" Version="V5">
+                                  <p:CvTypeIntoWithDescriptor.DesignTimeDescriptor>
+                                    <uc:CvDescriptor Id="92c34491-5a53-448a-b789-cbf4e7f31a49">
+                                      <uc:CvDescriptor.Anchors>
+                                        <x:Array Type="uc:CvElementDescriptor">
+                                          <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="73, 315, 55, 12" ElementType="Text" Text="File name:" />
+                                        </x:Array>
+                                      </uc:CvDescriptor.Anchors>
+                                      <uc:CvDescriptor.Target>
+                                        <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="131, 309, 829, 26" ElementType="InputBox" />
+                                      </uc:CvDescriptor.Target>
+                                    </uc:CvDescriptor>
+                                  </p:CvTypeIntoWithDescriptor.DesignTimeDescriptor>
+                                  <p:CvTypeIntoWithDescriptor.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="cde8118c-1f1b-4e3d-bdba-1aa8e83a35f1">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </p:CvTypeIntoWithDescriptor.Target>
+                                </p:CvTypeIntoWithDescriptor>
+                                <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Save' (777,384,27,12)&quot; +&#xA;&quot;Anchor: Button (747,379,87,25)&quot;]" DesignTimeCacheId="0c739803-d252-41d4-a88c-7c0f2f01dc60" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="434,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_5" InformativeScreenshot="6697072b5cdf290f21c2bbe287c85e8e" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
+                                  <p:CvClickWithDescriptor.CursorPosition>
+                                    <ui:CursorPosition Position="Center">
+                                      <ui:CursorPosition.OffsetX>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetX>
+                                      <ui:CursorPosition.OffsetY>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:CursorPosition.OffsetY>
+                                    </ui:CursorPosition>
+                                  </p:CvClickWithDescriptor.CursorPosition>
+                                  <p:CvClickWithDescriptor.DesignTimeDescriptor>
+                                    <uc:CvDescriptor Id="b5ee2983-e58b-45db-aa25-6db3ccda5b2a">
+                                      <uc:CvDescriptor.Anchors>
+                                        <x:Array Type="uc:CvElementDescriptor">
+                                          <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="747, 379, 87, 25" ElementType="Button" />
+                                        </x:Array>
+                                      </uc:CvDescriptor.Anchors>
+                                      <uc:CvDescriptor.Target>
+                                        <uc:CvElementDescriptor CellExtraInfo="{x:Null}" DesignTimeArea="777, 384, 27, 12" ElementType="Text" Text="Save" />
+                                      </uc:CvDescriptor.Target>
+                                    </uc:CvDescriptor>
+                                  </p:CvClickWithDescriptor.DesignTimeDescriptor>
+                                  <p:CvClickWithDescriptor.Target>
+                                    <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Selector="{x:Null}" Id="0036b2fe-62f1-475f-bd30-13078fbad655">
+                                      <ui:Target.TimeoutMS>
+                                        <InArgument x:TypeArguments="x:Int32" />
+                                      </ui:Target.TimeoutMS>
+                                      <ui:Target.WaitForReady>
+                                        <InArgument x:TypeArguments="ui:WaitForReady" />
+                                      </ui:Target.WaitForReady>
+                                    </ui:Target>
+                                  </p:CvClickWithDescriptor.Target>
+                                </p:CvClickWithDescriptor>
+                                <Delay Duration="00:00:02" sap:VirtualizedContainerService.HintSize="434,22" sap2010:WorkflowViewState.IdRef="Delay_1" />
+                                <ui:ReadCsvFile DataTable="[dt_MonthlyReport]" Delimitator="Comma" DisplayName="Read CSV" FilePath="[ReportFilePath]" sap:VirtualizedContainerService.HintSize="434,152" sap2010:WorkflowViewState.IdRef="ReadCsvFile_1" />
+                                <ui:MergeDataTable Destination="[dt_YearlyReport]" DisplayName="Merge Data Table" sap:VirtualizedContainerService.HintSize="434,132" sap2010:WorkflowViewState.IdRef="MergeDataTable_1" MissingSchemaAction="Add" Source="[dt_MonthlyReport]" />
+                                <ui:DeleteFileX DisplayName="Delete File" sap:VirtualizedContainerService.HintSize="434,79" sap2010:WorkflowViewState.IdRef="DeleteFileX_1" Path="[ReportFilePath]" />
+                              </Sequence>
+                            </If.Else>
+                          </If>
+                        </Sequence>
+                      </ActivityAction>
+                    </ui:ForEach.Body>
+                  </ui:ForEach>
+                </Sequence>
+              </ActivityAction>
+            </p:CVScope.Body>
+            <p:CVScope.DesignTimeCache>
+              <uc:CVCache CvUiElements="{x:Null}" OcrTexts="{x:Null}" />
+            </p:CVScope.DesignTimeCache>
+            <p:CVScope.DesignTimeCacheContainer>
+              <uc:CvCacheContainer>
+                <uc:CvCacheContainer.Caches>
+                  <scg:List x:TypeArguments="uc:CVCache" Capacity="4">
+                    <uc:CVCache DisplayName="No Report Screen" Id="a4209172-472a-46ed-970f-8d25893a0c3c" InformativeScreenshot="f475e07281f06f6d2866ed78d3a5a944" LogicalPosition="0, 71" OcrText="ACME System 1 acme-test.uipath.com says Home Switch to new theme Log Out No report found for this vendor / month / year that you have specified. Reports - Download N OK Home / Reports - Download Monthly Report Please fill in the following form to be able to download a specific Vendor Monthly Report. Vendor TaxID: IT145632 Month: August Year: 2021 Download Report Copyright © 2022 ACME Systems" Position="0, 71" ScreenshotGuid="cfa94efa-4400-41e0-9546-5bfc25c2e796" ServerVersion="1">
+                      <uc:CVCache.CvAnchorRelations>
+                        <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
+                          <uc:AnchorRelationInfo Target="3">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>31</x:Int32>
+                                <x:Int32>32</x:Int32>
+                                <x:Int32>33</x:Int32>
+                                <x:Int32>34</x:Int32>
+                                <x:Int32>35</x:Int32>
+                                <x:Int32>36</x:Int32>
+                                <x:Int32>37</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="1">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>54</x:Int32>
+                                <x:Int32>55</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="10">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>57</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="9">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>59</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                        </scg:List>
+                      </uc:CVCache.CvAnchorRelations>
+                      <uc:CVCache.CvUiElements>
+                        <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="16">
+                          <uc:CvElementInfo Category="Button" Region="1102, 97, 68, 34" />
+                          <uc:CvElementInfo Category="InputBox" Region="463, 290, 481, 36" />
+                          <uc:CvElementInfo Category="Button" Region="460, 482, 134, 36" />
+                          <uc:CvElementInfo Category="InputBox" Region="383, 159, 1142, 38" />
+                          <uc:CvElementInfo Category="InputBox" Region="1196, 100, 340, 41" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="460, 534, 1032, 54" />
+                          <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="509, 13, 18, 23" />
+                          <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="0, 4, 714, 46" />
+                          <uc:CvElementInfo Category="ArrowButton" Confidence="Runtime" Region="507, 13, 18, 20" />
+                          <uc:CvElementInfo Category="InputBox" Region="460, 433, 222, 37" />
+                          <uc:CvElementInfo Category="InputBox" Region="460, 364, 220, 35" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="653, 440, 19, 22" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="653, 371, 19, 22" />
+                        </scg:List>
+                      </uc:CVCache.CvUiElements>
+                      <uc:CVCache.OcrTexts>
+                        <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="128">
+                          <uc:OcrTextInfo Region="388, 16, 54, 16" Text="ACME" />
+                          <uc:OcrTextInfo Region="446, 16, 61, 19" Text="System" />
+                          <uc:OcrTextInfo Region="512, 16, 8, 16" Text="1" />
+                          <uc:OcrTextInfo Region="750, 16, 145, 16" Text="acme-test.uipath.com" />
+                          <uc:OcrTextInfo Region="897, 19, 30, 14" Text="says" />
+                          <uc:OcrTextInfo Region="1253, 18, 39, 13" Text="Home" />
+                          <uc:OcrTextInfo Region="1320, 18, 43, 13" Text="Switch" />
+                          <uc:OcrTextInfo Region="1364, 18, 14, 13" Text="to" />
+                          <uc:OcrTextInfo Region="1381, 20, 27, 11" Text="new" />
+                          <uc:OcrTextInfo Region="1410, 18, 41, 13" Text="theme" />
+                          <uc:OcrTextInfo Region="1479, 18, 25, 16" Text="Log" />
+                          <uc:OcrTextInfo Region="1507, 18, 23, 13" Text="Out" />
+                          <uc:OcrTextInfo Region="751, 46, 18, 12" Text="No" />
+                          <uc:OcrTextInfo Region="771, 46, 38, 14" Text="report" />
+                          <uc:OcrTextInfo Region="811, 45, 35, 13" Text="found" />
+                          <uc:OcrTextInfo Region="848, 45, 19, 13" Text="for" />
+                          <uc:OcrTextInfo Region="868, 45, 23, 13" Text="this" />
+                          <uc:OcrTextInfo Region="892, 45, 43, 13" Text="vendor" />
+                          <uc:OcrTextInfo Region="935, 46, 8, 14" Text="/" />
+                          <uc:OcrTextInfo Region="945, 45, 39, 13" Text="month" />
+                          <uc:OcrTextInfo Region="985, 46, 8, 14" Text="/" />
+                          <uc:OcrTextInfo Region="995, 48, 26, 13" Text="year" />
+                          <uc:OcrTextInfo Region="1021, 45, 26, 13" Text="that" />
+                          <uc:OcrTextInfo Region="1049, 48, 23, 13" Text="you" />
+                          <uc:OcrTextInfo Region="1073, 45, 29, 13" Text="have" />
+                          <uc:OcrTextInfo Region="1104, 45, 55, 16" Text="specified." />
+                          <uc:OcrTextInfo Region="391, 94, 125, 36" Text="Reports" />
+                          <uc:OcrTextInfo Region="525, 101, 13, 21" Text="-" />
+                          <uc:OcrTextInfo Region="548, 93, 160, 31" Text="Download" />
+                          <uc:OcrTextInfo Region="718, 94, 18, 30" Text="N" />
+                          <uc:OcrTextInfo Region="1125, 107, 19, 12" Text="OK" />
+                          <uc:OcrTextInfo Region="405, 171, 38, 13" Text="Home" />
+                          <uc:OcrTextInfo Region="449, 171, 7, 13" Text="/" />
+                          <uc:OcrTextInfo Region="463, 171, 50, 16" Text="Reports" />
+                          <uc:OcrTextInfo Region="516, 174, 6, 9" Text="-" />
+                          <uc:OcrTextInfo Region="524, 171, 64, 13" Text="Download" />
+                          <uc:OcrTextInfo Region="590, 171, 51, 15" Text="Monthly" />
+                          <uc:OcrTextInfo Region="644, 171, 44, 16" Text="Report" />
+                          <uc:OcrTextInfo Region="459, 219, 44, 13" Text="Please" />
+                          <uc:OcrTextInfo Region="505, 219, 15, 13" Text="fill" />
+                          <uc:OcrTextInfo Region="523, 219, 12, 13" Text="in" />
+                          <uc:OcrTextInfo Region="537, 219, 22, 13" Text="the" />
+                          <uc:OcrTextInfo Region="560, 219, 57, 16" Text="following" />
+                          <uc:OcrTextInfo Region="619, 219, 30, 13" Text="form" />
+                          <uc:OcrTextInfo Region="651, 219, 13, 13" Text="to" />
+                          <uc:OcrTextInfo Region="667, 219, 17, 13" Text="be" />
+                          <uc:OcrTextInfo Region="686, 218, 29, 14" Text="able" />
+                          <uc:OcrTextInfo Region="715, 219, 15, 13" Text="to" />
+                          <uc:OcrTextInfo Region="732, 219, 61, 13" Text="download" />
+                          <uc:OcrTextInfo Region="796, 220, 9, 12" Text="a" />
+                          <uc:OcrTextInfo Region="808, 219, 48, 16" Text="specific" />
+                          <uc:OcrTextInfo Region="857, 219, 48, 13" Text="Vendor" />
+                          <uc:OcrTextInfo Region="459, 239, 50, 15" Text="Monthly" />
+                          <uc:OcrTextInfo Region="512, 239, 46, 15" Text="Report." />
+                          <uc:OcrTextInfo Region="459, 269, 49, 13" Text="Vendor" />
+                          <uc:OcrTextInfo Region="511, 269, 42, 13" Text="TaxID:" />
+                          <uc:OcrTextInfo Region="472, 301, 60, 13" Text="IT145632" />
+                          <uc:OcrTextInfo Region="459, 342, 47, 14" Text="Month:" />
+                          <uc:OcrTextInfo Region="471, 376, 46, 15" Text="August" />
+                          <uc:OcrTextInfo Region="458, 412, 37, 13" Text="Year:" />
+                          <uc:OcrTextInfo Region="471, 444, 32, 13" Text="2021" />
+                          <uc:OcrTextInfo Region="472, 493, 64, 13" Text="Download" />
+                          <uc:OcrTextInfo Region="539, 493, 44, 16" Text="Report" />
+                          <uc:OcrTextInfo Region="459, 611, 62, 16" Text="Copyright" />
+                          <uc:OcrTextInfo Region="522, 611, 13, 13" Text="©" />
+                          <uc:OcrTextInfo Region="536, 611, 33, 13" Text="2022" />
+                          <uc:OcrTextInfo Region="571, 611, 42, 13" Text="ACME" />
+                          <uc:OcrTextInfo Region="615, 611, 55, 16" Text="Systems" />
+                        </scg:List>
+                      </uc:CVCache.OcrTexts>
+                    </uc:CVCache>
+                    <uc:CVCache DisplayName="Filename Type into screen" Id="0c739803-d252-41d4-a88c-7c0f2f01dc60" InformativeScreenshot="b76c872b0e767e16c2b64665831d2fbc" LogicalPosition="0, 71" OcrText="Organize New folder ? ^ Home Switch to new theme Log Out Name Date modified Type Size Quick access Desktop No items match your search. Downloads t Documents Pictures This PC Network File name: Report-IT145632-4 v Save as type: CSV File v ^ Hide Folders Save Cancel Year: 2021 Download Report Copyright © 2022 ACME Systems" Position="0, 71" ServerVersion="1">
+                      <uc:CVCache.CvAnchorRelations>
+                        <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
+                          <uc:AnchorRelationInfo Target="55">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>36</x:Int32>
+                                <x:Int32>37</x:Int32>
+                                <x:Int32>38</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="54">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>47</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="53">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>32</x:Int32>
+                                <x:Int32>33</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                        </scg:List>
+                      </uc:CVCache.CvAnchorRelations>
+                      <uc:CVCache.CvTables>
+                        <x:Array Type="uc:CvTableInfo">
+                          <uc:CvTableInfo>
+                            <uc:CvTableInfo.Columns>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>163</x:Int32>
+                                <x:Int32>167</x:Int32>
+                                <x:Int32>435</x:Int32>
+                                <x:Int32>556</x:Int32>
+                                <x:Int32>677</x:Int32>
+                                <x:Int32>758</x:Int32>
+                              </x:Array>
+                            </uc:CvTableInfo.Columns>
+                            <uc:CvTableInfo.Rows>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>23</x:Int32>
+                                <x:Int32>52</x:Int32>
+                                <x:Int32>84</x:Int32>
+                              </x:Array>
+                            </uc:CvTableInfo.Rows>
+                          </uc:CvTableInfo>
+                        </x:Array>
+                      </uc:CVCache.CvTables>
+                      <uc:CVCache.CvUiElements>
+                        <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="64">
+                          <uc:CvElementInfo Category="Icon" Region="39, 115, 18, 22" />
+                          <uc:CvElementInfo Category="Button" Region="747, 379, 87, 25" />
+                          <uc:CvElementInfo Category="Button" Region="847, 378, 89, 26" />
+                          <uc:CvElementInfo Category="Icon" Region="38, 141, 20, 17" />
+                          <uc:CvElementInfo Category="Icon" Region="29, 173, 21, 17" />
+                          <uc:CvElementInfo Category="Icon" Region="36, 91, 21, 21" />
+                          <uc:CvElementInfo Category="Button" Region="461, 483, 132, 33" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="15, 386, 18, 16" />
+                          <uc:CvElementInfo Category="Icon" Region="29, 203, 21, 21" />
+                          <uc:CvElementInfo Category="Icon" Region="37, 70, 22, 16" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="879, 1, 17, 17" />
+                          <uc:CvElementInfo Category="Icon" Region="147, 118, 16, 16" />
+                          <uc:CvElementInfo Category="Icon" Region="147, 94, 16, 16" />
+                          <uc:CvElementInfo Category="Icon" Region="31, 45, 19, 18" />
+                          <uc:CvElementInfo Category="Icon" Region="148, 142, 16, 15" />
+                          <uc:CvElementInfo Category="Icon" Region="147, 70, 16, 16" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="75, 3, 15, 15" />
+                          <uc:CvElementInfo Category="Icon" Region="854, 1, 22, 19" />
+                          <uc:CvElementInfo Category="Button" Region="439, 24, 121, 29" />
+                          <uc:CvElementInfo Category="Icon" Region="917, 0, 22, 20" />
+                          <uc:CvElementInfo Category="InputBox" Region="955, 99, 582, 41" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="300, 23, 17, 13" />
+                          <uc:CvElementInfo Category="Cell" Region="677, 23, 81, 29" />
+                          <uc:CvElementInfo Category="Cell" Region="167, 23, 268, 29" />
+                          <uc:CvElementInfo Category="Cell" Region="556, 23, 121, 29" />
+                          <uc:CvElementInfo Category="Cell" Region="677, 52, 81, 32" />
+                          <uc:CvElementInfo Category="Cell" Region="556, 52, 121, 32" />
+                          <uc:CvElementInfo Category="Cell" Region="435, 23, 121, 29" />
+                          <uc:CvElementInfo Category="Cell" Region="435, 52, 121, 32" />
+                          <uc:CvElementInfo Category="Cell" Region="677, 70, 83, 21" />
+                          <uc:CvElementInfo Category="Cell" Region="13, 24, 150, 20" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="461, 528, 1014, 64" />
+                          <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="918, 0, 21, 20" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="944, 158, 589, 37" />
+                          <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="559, 25, 122, 30" />
+                          <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="947, 93, 21, 34" />
+                          <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="10, 169, 155, 26" />
+                          <uc:CvElementInfo Category="Button" Confidence="Runtime" Region="166, 26, 274, 26" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="461, 549, 762, 40" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="167, 52, 268, 32" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="169, 85, 271, 22" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="158, 110, 287, 27" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="165, 98, 277, 21" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="12, 42, 152, 20" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="165, 80, 273, 16" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="163, 113, 5, 24" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="159, 142, 244, 20" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="770, 227, 175, 27" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="754, 243, 191, 26" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="794, 219, 104, 25" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="682, 245, 71, 22" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="786, 207, 156, 27" />
+                          <uc:CvElementInfo Category="Cell" Confidence="Runtime" Region="8, 65, 154, 23" />
+                          <uc:CvElementInfo Category="InputBox" Region="131, 309, 829, 26" />
+                          <uc:CvElementInfo Category="InputBox" Region="459, 433, 222, 37" />
+                          <uc:CvElementInfo Category="InputBox" Region="134, 333, 816, 25" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="928, 335, 19, 23" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="928, 310, 19, 23" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="653, 440, 19, 22" />
+                        </scg:List>
+                      </uc:CVCache.CvUiElements>
+                      <uc:CVCache.OcrTexts>
+                        <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="64">
+                          <uc:OcrTextInfo Region="26, 3, 48, 15" Text="Organize" />
+                          <uc:OcrTextInfo Region="116, 3, 25, 12" Text="New" />
+                          <uc:OcrTextInfo Region="142, 3, 34, 12" Text="folder" />
+                          <uc:OcrTextInfo Region="925, 4, 7, 11" Text="?" />
+                          <uc:OcrTextInfo Region="304, 24, 11, 7" Text="^" />
+                          <uc:OcrTextInfo Region="1253, 18, 39, 13" Text="Home" />
+                          <uc:OcrTextInfo Region="1320, 18, 43, 13" Text="Switch" />
+                          <uc:OcrTextInfo Region="1364, 18, 14, 13" Text="to" />
+                          <uc:OcrTextInfo Region="1381, 20, 27, 11" Text="new" />
+                          <uc:OcrTextInfo Region="1410, 18, 41, 13" Text="theme" />
+                          <uc:OcrTextInfo Region="1479, 18, 25, 16" Text="Log" />
+                          <uc:OcrTextInfo Region="1507, 18, 23, 13" Text="Out" />
+                          <uc:OcrTextInfo Region="184, 32, 34, 12" Text="Name" />
+                          <uc:OcrTextInfo Region="445, 32, 25, 12" Text="Date" />
+                          <uc:OcrTextInfo Region="472, 31, 49, 13" Text="modified" />
+                          <uc:OcrTextInfo Region="564, 32, 28, 15" Text="Type" />
+                          <uc:OcrTextInfo Region="685, 32, 22, 12" Text="Size" />
+                          <uc:OcrTextInfo Region="52, 47, 33, 12" Text="Quick" />
+                          <uc:OcrTextInfo Region="86, 50, 35, 9" Text="access" />
+                          <uc:OcrTextInfo Region="60, 71, 44, 15" Text="Desktop" />
+                          <uc:OcrTextInfo Region="483, 67, 17, 11" Text="No" />
+                          <uc:OcrTextInfo Region="502, 68, 30, 11" Text="items" />
+                          <uc:OcrTextInfo Region="534, 67, 34, 12" Text="match" />
+                          <uc:OcrTextInfo Region="570, 70, 26, 11" Text="your" />
+                          <uc:OcrTextInfo Region="598, 68, 38, 11" Text="search." />
+                          <uc:OcrTextInfo Region="60, 95, 61, 12" Text="Downloads" />
+                          <uc:OcrTextInfo Region="951, 97, 13, 27" Text="t" />
+                          <uc:OcrTextInfo Region="60, 119, 63, 12" Text="Documents" />
+                          <uc:OcrTextInfo Region="60, 143, 44, 12" Text="Pictures" />
+                          <uc:OcrTextInfo Region="52, 175, 23, 12" Text="This" />
+                          <uc:OcrTextInfo Region="77, 174, 16, 13" Text="PC" />
+                          <uc:OcrTextInfo Region="52, 207, 47, 12" Text="Network" />
+                          <uc:OcrTextInfo Region="73, 315, 20, 12" Text="File" />
+                          <uc:OcrTextInfo Region="94, 318, 34, 9" Text="name:" />
+                          <uc:OcrTextInfo Region="137, 313, 100, 15" Text="Report-IT145632-4" />
+                          <uc:OcrTextInfo Region="932, 317, 11, 8" Text="v" />
+                          <uc:OcrTextInfo Region="60, 340, 25, 12" Text="Save" />
+                          <uc:OcrTextInfo Region="87, 343, 12, 9" Text="as" />
+                          <uc:OcrTextInfo Region="100, 342, 28, 13" Text="type:" />
+                          <uc:OcrTextInfo Region="136, 340, 23, 12" Text="CSV" />
+                          <uc:OcrTextInfo Region="160, 340, 20, 12" Text="File" />
+                          <uc:OcrTextInfo Region="932, 342, 11, 8" Text="v" />
+                          <uc:OcrTextInfo Region="19, 389, 11, 9" Text="^" />
+                          <uc:OcrTextInfo Region="37, 387, 27, 12" Text="Hide" />
+                          <uc:OcrTextInfo Region="65, 387, 40, 12" Text="Folders" />
+                          <uc:OcrTextInfo Region="777, 384, 27, 12" Text="Save" />
+                          <uc:OcrTextInfo Region="872, 384, 37, 12" Text="Cancel" />
+                          <uc:OcrTextInfo Region="460, 415, 34, 10" Text="Year:" />
+                          <uc:OcrTextInfo Region="471, 444, 32, 13" Text="2021" />
+                          <uc:OcrTextInfo Region="472, 493, 64, 13" Text="Download" />
+                          <uc:OcrTextInfo Region="538, 493, 45, 16" Text="Report" />
+                          <uc:OcrTextInfo Region="459, 611, 62, 16" Text="Copyright" />
+                          <uc:OcrTextInfo Region="522, 611, 13, 13" Text="©" />
+                          <uc:OcrTextInfo Region="536, 611, 33, 13" Text="2022" />
+                          <uc:OcrTextInfo Region="571, 611, 42, 13" Text="ACME" />
+                          <uc:OcrTextInfo Region="615, 611, 55, 16" Text="Systems" />
+                        </scg:List>
+                      </uc:CVCache.OcrTexts>
+                    </uc:CVCache>
+                    <uc:CVCache DisplayName="Main Screen 2" Id="349690f4-4a9c-42ab-abbc-02417bbb3abc" InformativeScreenshot="3959178b48c00bf7b8897df308c70918" LogicalPosition="729, 62" OcrText="ACME System 1 Home Switch to new theme Log Out Reports - Download Monthly Report Home / Reports - Download Monthly Report Please fill in the following form to be able to download a specific Vendor Monthly Report. Vendor TaxID: Month: --- Year: Download Report Copyright © 2022 ACME Systems" Position="729, 62" ScreenshotGuid="e4d71758-8de3-4491-b70f-b20786e90198" ServerVersion="1">
+                      <uc:CVCache.CvAnchorRelations>
+                        <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
+                          <uc:AnchorRelationInfo Target="0">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>38</x:Int32>
+                                <x:Int32>39</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="10">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>40</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                          <uc:AnchorRelationInfo Target="9">
+                            <uc:AnchorRelationInfo.Anchors>
+                              <x:Array Type="x:Int32">
+                                <x:Int32>42</x:Int32>
+                              </x:Array>
+                            </uc:AnchorRelationInfo.Anchors>
+                          </uc:AnchorRelationInfo>
+                        </scg:List>
+                      </uc:CVCache.CvAnchorRelations>
+                      <uc:CVCache.CvUiElements>
+                        <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="16">
+                          <uc:CvElementInfo Category="InputBox" Region="461, 290, 482, 36" />
+                          <uc:CvElementInfo Category="Button" Region="460, 482, 134, 36" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="460, 534, 1033, 54" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="381, 158, 1149, 39" />
+                          <uc:CvElementInfo Category="InputBox" Confidence="Runtime" Region="757, 91, 772, 50" />
+                          <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="468, 443, 23, 19" />
+                          <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="468, 375, 24, 17" />
+                          <uc:CvElementInfo Category="Icon" Confidence="Runtime" Region="508, 12, 18, 23" />
+                          <uc:CvElementInfo Category="ArrowButton" Confidence="Runtime" Region="507, 12, 19, 22" />
+                          <uc:CvElementInfo Category="InputBox" Region="459, 432, 223, 36" />
+                          <uc:CvElementInfo Category="InputBox" Region="459, 364, 221, 36" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="654, 441, 19, 21" />
+                          <uc:CvElementInfo Category="ArrowButton" Region="653, 370, 19, 24" />
+                        </scg:List>
+                      </uc:CVCache.CvUiElements>
+                      <uc:CVCache.OcrTexts>
+                        <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="64">
+                          <uc:OcrTextInfo Region="388, 16, 54, 16" Text="ACME" />
+                          <uc:OcrTextInfo Region="446, 16, 61, 19" Text="System" />
+                          <uc:OcrTextInfo Region="512, 16, 8, 16" Text="1" />
+                          <uc:OcrTextInfo Region="1253, 18, 39, 13" Text="Home" />
+                          <uc:OcrTextInfo Region="1320, 18, 43, 13" Text="Switch" />
+                          <uc:OcrTextInfo Region="1364, 18, 14, 13" Text="to" />
+                          <uc:OcrTextInfo Region="1381, 20, 27, 11" Text="new" />
+                          <uc:OcrTextInfo Region="1410, 18, 41, 13" Text="theme" />
+                          <uc:OcrTextInfo Region="1479, 18, 25, 16" Text="Log" />
+                          <uc:OcrTextInfo Region="1507, 18, 23, 13" Text="Out" />
+                          <uc:OcrTextInfo Region="391, 94, 125, 36" Text="Reports" />
+                          <uc:OcrTextInfo Region="524, 99, 14, 24" Text="-" />
+                          <uc:OcrTextInfo Region="549, 94, 160, 30" Text="Download" />
+                          <uc:OcrTextInfo Region="719, 93, 127, 37" Text="Monthly" />
+                          <uc:OcrTextInfo Region="855, 93, 110, 37" Text="Report" />
+                          <uc:OcrTextInfo Region="405, 171, 38, 13" Text="Home" />
+                          <uc:OcrTextInfo Region="449, 171, 7, 13" Text="/" />
+                          <uc:OcrTextInfo Region="463, 171, 50, 16" Text="Reports" />
+                          <uc:OcrTextInfo Region="515, 174, 7, 9" Text="-" />
+                          <uc:OcrTextInfo Region="524, 171, 64, 13" Text="Download" />
+                          <uc:OcrTextInfo Region="590, 171, 51, 15" Text="Monthly" />
+                          <uc:OcrTextInfo Region="644, 171, 44, 16" Text="Report" />
+                          <uc:OcrTextInfo Region="459, 219, 44, 13" Text="Please" />
+                          <uc:OcrTextInfo Region="505, 219, 15, 13" Text="fill" />
+                          <uc:OcrTextInfo Region="523, 219, 12, 13" Text="in" />
+                          <uc:OcrTextInfo Region="537, 219, 22, 13" Text="the" />
+                          <uc:OcrTextInfo Region="560, 219, 57, 16" Text="following" />
+                          <uc:OcrTextInfo Region="619, 219, 30, 13" Text="form" />
+                          <uc:OcrTextInfo Region="651, 219, 13, 13" Text="to" />
+                          <uc:OcrTextInfo Region="667, 219, 17, 13" Text="be" />
+                          <uc:OcrTextInfo Region="686, 218, 29, 14" Text="able" />
+                          <uc:OcrTextInfo Region="716, 219, 14, 13" Text="to" />
+                          <uc:OcrTextInfo Region="732, 219, 61, 13" Text="download" />
+                          <uc:OcrTextInfo Region="796, 220, 9, 12" Text="a" />
+                          <uc:OcrTextInfo Region="808, 219, 48, 16" Text="specific" />
+                          <uc:OcrTextInfo Region="857, 219, 48, 13" Text="Vendor" />
+                          <uc:OcrTextInfo Region="459, 239, 50, 16" Text="Monthly" />
+                          <uc:OcrTextInfo Region="512, 239, 46, 15" Text="Report." />
+                          <uc:OcrTextInfo Region="459, 269, 50, 13" Text="Vendor" />
+                          <uc:OcrTextInfo Region="511, 269, 42, 13" Text="TaxID:" />
+                          <uc:OcrTextInfo Region="459, 343, 47, 13" Text="Month:" />
+                          <uc:OcrTextInfo Region="471, 376, 17, 12" Text="---" />
+                          <uc:OcrTextInfo Region="458, 412, 36, 13" Text="Year:" />
+                          <uc:OcrTextInfo Region="472, 493, 64, 13" Text="Download" />
+                          <uc:OcrTextInfo Region="539, 493, 44, 16" Text="Report" />
+                          <uc:OcrTextInfo Region="459, 611, 62, 16" Text="Copyright" />
+                          <uc:OcrTextInfo Region="522, 611, 13, 13" Text="©" />
+                          <uc:OcrTextInfo Region="536, 611, 33, 13" Text="2022" />
+                          <uc:OcrTextInfo Region="571, 611, 42, 13" Text="ACME" />
+                          <uc:OcrTextInfo Region="615, 611, 55, 16" Text="Systems" />
+                        </scg:List>
+                      </uc:CVCache.OcrTexts>
+                    </uc:CVCache>
+                    <uc:CVCache DisplayName="No Report Screen 2" Id="679b77a5-05a1-4ed8-91f4-ae2c44264a40" InformativeScreenshot="e84e5c0eb535f65abd36f66bbdda26fe" LogicalPosition="729, 62" OcrText="acme-test.uipath.com says No report found for this vendor / month / year that you have specified. OK" Position="729, 62" ScreenshotGuid="bcc0686d-3cf3-48b4-a697-e051dd3991ac" ServerVersion="1">
+                      <uc:CVCache.CvAnchorRelations>
+                        <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
+                      </uc:CVCache.CvAnchorRelations>
+                      <uc:CVCache.CvUiElements>
+                        <scg:List x:TypeArguments="uc:CvElementInfo" Capacity="4">
+                          <uc:CvElementInfo Category="Button" Region="374, 106, 66, 34" />
+                        </scg:List>
+                      </uc:CVCache.CvUiElements>
+                      <uc:CVCache.OcrTexts>
+                        <scg:List x:TypeArguments="uc:OcrTextInfo" Capacity="32">
+                          <uc:OcrTextInfo Region="22, 25, 145, 17" Text="acme-test.uipath.com" />
+                          <uc:OcrTextInfo Region="168, 28, 30, 14" Text="says" />
+                          <uc:OcrTextInfo Region="21, 55, 20, 12" Text="No" />
+                          <uc:OcrTextInfo Region="43, 55, 37, 15" Text="report" />
+                          <uc:OcrTextInfo Region="82, 55, 35, 12" Text="found" />
+                          <uc:OcrTextInfo Region="119, 55, 18, 12" Text="for" />
+                          <uc:OcrTextInfo Region="139, 55, 22, 12" Text="this" />
+                          <uc:OcrTextInfo Region="162, 54, 43, 13" Text="vendor" />
+                          <uc:OcrTextInfo Region="206, 55, 8, 14" Text="/" />
+                          <uc:OcrTextInfo Region="216, 54, 40, 14" Text="month" />
+                          <uc:OcrTextInfo Region="256, 55, 8, 14" Text="/" />
+                          <uc:OcrTextInfo Region="265, 57, 27, 13" Text="year" />
+                          <uc:OcrTextInfo Region="293, 54, 26, 13" Text="that" />
+                          <uc:OcrTextInfo Region="319, 57, 24, 13" Text="you" />
+                          <uc:OcrTextInfo Region="344, 54, 29, 13" Text="have" />
+                          <uc:OcrTextInfo Region="374, 54, 57, 16" Text="specified." />
+                          <uc:OcrTextInfo Region="396, 116, 19, 12" Text="OK" />
+                        </scg:List>
+                      </uc:CVCache.OcrTexts>
+                    </uc:CVCache>
+                  </scg:List>
+                </uc:CvCacheContainer.Caches>
+              </uc:CvCacheContainer>
+            </p:CVScope.DesignTimeCacheContainer>
+            <p:CVScope.OCREngine>
+              <ActivityFunc x:TypeArguments="sd1:Image, scg:IEnumerable(scg:KeyValuePair(sd1:Rectangle, x:String))">
+                <ActivityFunc.Argument>
+                  <DelegateInArgument x:TypeArguments="sd1:Image" Name="Image" />
+                </ActivityFunc.Argument>
+                <p1:UiPathScreenOCR ApiKey="{x:Null}" Endpoint="{x:Null}" Output="{x:Null}" Text="{x:Null}" UseLocalServer="{x:Null}" ComputeSkewAngle="False" ExtractWords="True" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="UiPathScreenOCR_1" Image="[Image]" Language="en" Profile="Screen" Scale="1" Timeout="100000" />
+              </ActivityFunc>
+            </p:CVScope.OCREngine>
+            <p:CVScope.Target>
+              <ui:Target ClippingRegion="{x:Null}" Element="{x:Null}" Id="07634970-0f69-4e23-b943-c7f39ac4c448" InformativeScreenshot="85c6f72fd6febe1b20ad4730bae893de" Selector="&lt;html app='chrome.exe' title='ACME System 1 - *' /&gt;&lt;webctrl tag='BODY' /&gt;" WaitForReady="INTERACTIVE">
+                <ui:Target.TimeoutMS>
+                  <InArgument x:TypeArguments="x:Int32" />
+                </ui:Target.TimeoutMS>
+              </ui:Target>
+            </p:CVScope.Target>
+            <p:CVScope.UseLocalServer>
+              <InArgument x:TypeArguments="x:Boolean" />
+            </p:CVScope.UseLocalServer>
+          </p:CVScope>
+        </ActivityAction>
+      </ui:BrowserScope.Body>
+    </ui:BrowserScope>
+    <Assign sap:VirtualizedContainerService.HintSize="1043,60" sap2010:WorkflowViewState.IdRef="Assign_4">
+      <Assign.To>
+        <OutArgument x:TypeArguments="x:String">[out_YearlyReportPath]</OutArgument>
+      </Assign.To>
+      <Assign.Value>
+        <InArgument x:TypeArguments="x:String">[Path.Combine(Environment.CurrentDirectory, in_ReportsDownloadPath, "Yearly-Report-" + in_Year + "-" + in_TaxID + ".xlsx")]</InArgument>
+      </Assign.Value>
+    </Assign>
+    <ui:WriteRange AddHeaders="False" DataTable="[dt_YearlyReport]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="1043,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[out_YearlyReportPath]" />
+  </Sequence>
+</Activity>
