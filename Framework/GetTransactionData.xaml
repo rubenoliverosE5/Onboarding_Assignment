@@ -105,7 +105,7 @@
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="a86e2713-1728-494d-9712-fe6540b1094d" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="603,803" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="a86e2713-1728-494d-9712-fe6540b1094d" DisplayName="CV Screen - Work items" sap:VirtualizedContainerService.HintSize="603,803" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
             <p:CVScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
@@ -162,7 +162,7 @@
               <uc:CvCacheContainer>
                 <uc:CvCacheContainer.Caches>
                   <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
-                    <uc:CVCache DisplayName="Screen CV Element Exists - 'Da (Main)" Id="a86e2713-1728-494d-9712-fe6540b1094d" InformativeScreenshot="811cbb2b6272a118851ed216c85e47a4" LogicalPosition="452, 287" OcrText="Search Results Please find below your work items. They need to be completed in the order specified by your manager. Actions WIID Description Type Status Date 82792805 Research Client Check Copy WI2 Open 2017-11-27 82792812 Research Client Check Copy WI2 Open 2019-03-29 82792866 Verify Account Position WI1 Open 2020-04-11 Q 82792865 Verify Account Position WI1 Open 2021-06-26 Q 82792826 Research Client Check Copy WI2 Open 2017-06-15 82792814 Research Client Check Copy WI2 Open 2018-11-11 Q 82792862 Verify Account Position WI1 Open 2017-10-19 Q 82792818 Research Client Check Copy WI2 Open 2021-12-31 82792748 Calculate Client Security Hash WI5 Open 2020-01-20 82792841 Verify Account Position WI1 Open 2017-10-15 &lt; 1 2 3 4 5 6 7 8 9 10 11 12 14 &gt; Copyright © 2022 ACME Systems" Position="452, 287" ScreenshotGuid="b0fae8dc-01a3-41e1-a81d-3937304f3753" ServerVersion="1">
+                    <uc:CVCache DisplayName="Work items" Id="a86e2713-1728-494d-9712-fe6540b1094d" InformativeScreenshot="811cbb2b6272a118851ed216c85e47a4" LogicalPosition="452, 287" OcrText="Search Results Please find below your work items. They need to be completed in the order specified by your manager. Actions WIID Description Type Status Date 82792805 Research Client Check Copy WI2 Open 2017-11-27 82792812 Research Client Check Copy WI2 Open 2019-03-29 82792866 Verify Account Position WI1 Open 2020-04-11 Q 82792865 Verify Account Position WI1 Open 2021-06-26 Q 82792826 Research Client Check Copy WI2 Open 2017-06-15 82792814 Research Client Check Copy WI2 Open 2018-11-11 Q 82792862 Verify Account Position WI1 Open 2017-10-19 Q 82792818 Research Client Check Copy WI2 Open 2021-12-31 82792748 Calculate Client Security Hash WI5 Open 2020-01-20 82792841 Verify Account Position WI1 Open 2017-10-15 &lt; 1 2 3 4 5 6 7 8 9 10 11 12 14 &gt; Copyright © 2022 ACME Systems" Position="452, 287" ScreenshotGuid="b0fae8dc-01a3-41e1-a81d-3937304f3753" ServerVersion="1">
                       <uc:CVCache.CvAnchorRelations>
                         <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                       </uc:CVCache.CvAnchorRelations>

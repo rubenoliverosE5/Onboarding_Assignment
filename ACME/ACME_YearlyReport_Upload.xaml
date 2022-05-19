@@ -1,14 +1,14 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ACME_YearlyReport_Upload" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_TaxID" Type="InArgument(x:String)" />
-    <x:Property Name="in_ReportPath" Type="InArgument(x:String)" />
-    <x:Property Name="in_Year" Type="InArgument(x:String)" />
-    <x:Property Name="out_UploadID" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="TaxID used to upload the yearly report" Name="in_TaxID" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Absolute path for the yearly report" Name="in_ReportPath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Year info used to upload the yearly report" Name="in_Year" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="The ID for validating the uploading of the yearly report" Name="out_UploadID" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1199,2196</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1199,2458</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ACME_YearlyReport_Upload_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
@@ -82,14 +82,16 @@
       <AssemblyReference>System.ValueTuple</AssemblyReference>
       <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
       <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_YearlyReport_Upload" sap:VirtualizedContainerService.HintSize="476,2131" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ACME_YearlyReport_Upload" sap:VirtualizedContainerService.HintSize="476,2393" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Uploading yearly report&quot;]" />
     <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="6fb3f052-0fc0-4b0f-b48a-523fe870c75d" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="434,1231" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
       <p:CVScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -236,7 +238,7 @@
       <p:CVScope.DesignTimeCacheContainer>
         <uc:CvCacheContainer>
           <uc:CvCacheContainer.Caches>
-            <scg:List x:TypeArguments="uc:CVCache" Capacity="3">
+            <scg:List x:TypeArguments="uc:CVCache" Capacity="2">
               <uc:CVCache DisplayName="Screen CV Click - 'Upload Repo (Main)" Id="6fb3f052-0fc0-4b0f-b48a-523fe870c75d" InformativeScreenshot="789aa7cda6f8042d9259544a979ae303" LogicalPosition="0, 71" OcrText="ACME System 1 Home Switch to new theme Log Out Reports - Upload Yearly Report Home / Reports - Upload Yearly Report Please fill in the following form to be able to upload a specific Vendor Yearly Report. Vendor TaxID: Year: -- Select Report File Upload Report Copyright © 2022 ACME Systems" Position="0, 71" ScreenshotGuid="e9f272d8-c5df-401d-b76f-d34c46dea9b7" ServerVersion="1">
                 <uc:CVCache.CvAnchorRelations>
                   <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
@@ -497,7 +499,7 @@
             <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
           </ActivityAction.Argument>
           <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_3">
-            <p:CvGetTextWithDescriptor RefreshBefore="{x:Null}" Descriptor="[&quot;Target: AnyText (22,74,223,14)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Report was uploaded - confirmation id is' (21,54,236,16)&quot;]" DesignTimeCacheId="84cc0080-df02-4594-9702-9b49a8aa934c" DesignTimeScaleFactor="1" DisplayName="CV Get Text - Any Text" sap:VirtualizedContainerService.HintSize="400,166" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_2" InformativeScreenshot="087395c65b8884e0349f730681f92067" Result="[out_UploadID]" Version="V5">
+            <p:CvGetTextWithDescriptor RefreshBefore="{x:Null}" Descriptor="[&quot;Target: AnyText (22,74,223,14)&quot; +&#xA;&quot;Anchor: Text 'Report was uploaded - confirmation id is' (21,54,236,16)&quot;]" DesignTimeCacheId="84cc0080-df02-4594-9702-9b49a8aa934c" DesignTimeScaleFactor="1" DisplayName="CV Get Text - Any Text" sap:VirtualizedContainerService.HintSize="400,166" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_2" InformativeScreenshot="087395c65b8884e0349f730681f92067" Result="[out_UploadID]" Version="V5">
               <p:CvGetTextWithDescriptor.DesignTimeDescriptor>
                 <uc:CvDescriptor Id="53ba981c-6084-49c8-a30a-f01c4a4751e8">
                   <uc:CvDescriptor.Anchors>
@@ -545,6 +547,9 @@
           </Sequence>
         </ActivityAction>
       </p:CVScope.Body>
+      <p:CVScope.DesignTimeCache>
+        <uc:CVCache CvUiElements="{x:Null}" OcrTexts="{x:Null}" />
+      </p:CVScope.DesignTimeCache>
       <p:CVScope.DesignTimeCacheContainer>
         <uc:CvCacheContainer>
           <uc:CvCacheContainer.Caches>
@@ -597,5 +602,6 @@
         <InArgument x:TypeArguments="x:Boolean" />
       </p:CVScope.UseLocalServer>
     </p:CVScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Yearly report successfully uploaded&quot;]" />
   </Sequence>
 </Activity>

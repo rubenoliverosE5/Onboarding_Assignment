@@ -1,6 +1,6 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ACME_login" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_ACMEUrl" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="ACME URL used to open browser" Name="in_ACMEUrl" Type="InArgument(x:String)" />
   </x:Members>
   <this:ACME_login.in_ACMEUrl>
     <InArgument x:TypeArguments="x:String" />
@@ -8,7 +8,7 @@
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1199,2292</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1199,2585</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ACME_login_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="36">
@@ -87,9 +87,10 @@
       <AssemblyReference>UiPath.CV</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.CV.Activities</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_login" sap:VirtualizedContainerService.HintSize="644,2227" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Workflow to login into ACME site" DisplayName="ACME_login" sap:VirtualizedContainerService.HintSize="644,2520" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="ss:SecureString" Name="Password" />
       <Variable x:TypeArguments="x:String" Name="Username" />
@@ -98,15 +99,17 @@
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+        <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log message (Login into ACME)" sap:VirtualizedContainerService.HintSize="602,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Login into ACME site...&quot;]" />
     <ui:InvokeWorkflowFile ArgumentsVariable="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Invoke GetACMECredentials workflow" sap:VirtualizedContainerService.HintSize="602,112" sap2010:WorkflowViewState.IdRef="InvokeWorkflowFile_1" UnSafe="False" WorkflowFileName="ACME\Get_ACME_Credentials.xaml">
       <ui:InvokeWorkflowFile.Arguments>
         <OutArgument x:TypeArguments="ss:SecureString" x:Key="out_Password">[Password]</OutArgument>
         <OutArgument x:TypeArguments="x:String" x:Key="out_Username">[Username]</OutArgument>
       </ui:InvokeWorkflowFile.Arguments>
     </ui:InvokeWorkflowFile>
-    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Open Browser" sap:VirtualizedContainerService.HintSize="602,1983" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Private="True" Url="[in_ACMEUrl]">
+    <ui:OpenBrowser AutomaticallyDownloadWebDriver="{x:Null}" CommunicationMethod="{x:Null}" Hidden="{x:Null}" NewSession="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Login into ACME site" sap:VirtualizedContainerService.HintSize="602,1983" sap2010:WorkflowViewState.IdRef="OpenBrowser_1" Private="True" Url="[in_ACMEUrl]">
       <ui:OpenBrowser.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -119,7 +122,7 @@
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
             <ui:MaximizeWindow Window="{x:Null}" DisplayName="Maximize Window" sap:VirtualizedContainerService.HintSize="526,22" sap2010:WorkflowViewState.IdRef="MaximizeWindow_3" />
-            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="10c87651-700b-43e9-8fc1-8701550f13d4" DisplayName="CV Screen Scope 'FORM'" sap:VirtualizedContainerService.HintSize="526,863" sap2010:WorkflowViewState.IdRef="CVScope_3" Version="V5">
+            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="10c87651-700b-43e9-8fc1-8701550f13d4" DisplayName="CV Screen - ACME site" sap:VirtualizedContainerService.HintSize="526,863" sap2010:WorkflowViewState.IdRef="CVScope_3" Version="V5">
               <p:CVScope.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
@@ -218,7 +221,7 @@
                 <uc:CvCacheContainer>
                   <uc:CvCacheContainer.Caches>
                     <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
-                      <uc:CVCache DisplayName="Screen CV Type Into - 'Email:' (Main)" Id="10c87651-700b-43e9-8fc1-8701550f13d4" InformativeScreenshot="898a8c7946b22f1c74f7f60d993bfb3b" LogicalPosition="460, 343" OcrText="Email: Password: Remember Me Login Forgot Your Password? Register" Position="460, 343" ScreenshotGuid="4cf30731-9adf-44e3-a7a1-204f6c71da4e" ServerVersion="1">
+                      <uc:CVCache DisplayName="ACME login" Id="10c87651-700b-43e9-8fc1-8701550f13d4" InformativeScreenshot="898a8c7946b22f1c74f7f60d993bfb3b" LogicalPosition="460, 343" OcrText="Email: Password: Remember Me Login Forgot Your Password? Register" Position="460, 343" ScreenshotGuid="4cf30731-9adf-44e3-a7a1-204f6c71da4e" ServerVersion="1">
                         <uc:CVCache.CvAnchorRelations>
                           <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
                             <uc:AnchorRelationInfo Target="5">
@@ -297,7 +300,7 @@
                 <InArgument x:TypeArguments="x:Boolean" />
               </p:CVScope.UseLocalServer>
             </p:CVScope>
-            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="094bc465-3fcb-485e-9ca1-e4115bb4e062" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="526,447" sap2010:WorkflowViewState.IdRef="CVScope_4" Version="V5">
+            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="094bc465-3fcb-485e-9ca1-e4115bb4e062" DisplayName="CV Screen - ACME welcome" sap:VirtualizedContainerService.HintSize="526,447" sap2010:WorkflowViewState.IdRef="CVScope_4" Version="V5">
               <p:CVScope.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
@@ -323,7 +326,7 @@
                 <uc:CvCacheContainer>
                   <uc:CvCacheContainer.Caches>
                     <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
-                      <uc:CVCache DisplayName="Screen CV Element Exists - 'We (Main)" Id="094bc465-3fcb-485e-9ca1-e4115bb4e062" InformativeScreenshot="21067dc254c2cf4e08981c0c39b33143" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="c1b55a50-bc5f-4aec-a01a-809abb26d8b1" ServerVersion="1">
+                      <uc:CVCache DisplayName="ACME Welcome" Id="094bc465-3fcb-485e-9ca1-e4115bb4e062" InformativeScreenshot="21067dc254c2cf4e08981c0c39b33143" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="c1b55a50-bc5f-4aec-a01a-809abb26d8b1" ServerVersion="1">
                         <uc:CVCache.CvAnchorRelations>
                           <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                         </uc:CVCache.CvAnchorRelations>
@@ -436,13 +439,13 @@
                 <InArgument x:TypeArguments="x:Boolean" />
               </p:CVScope.UseLocalServer>
             </p:CVScope>
-            <Sequence DisplayName="Log into ACME website" sap:VirtualizedContainerService.HintSize="526,338" sap2010:WorkflowViewState.IdRef="Sequence_11">
+            <Sequence DisplayName="Checking if login to ACME site was successful " sap:VirtualizedContainerService.HintSize="526,338" sap2010:WorkflowViewState.IdRef="Sequence_11">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
                   <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <If Condition="[Not ACMEWelcome]" sap:VirtualizedContainerService.HintSize="484,246" sap2010:WorkflowViewState.IdRef="If_2">
+              <If Condition="[Not ACMEWelcome]" DisplayName="If welcome screen is not reached" sap:VirtualizedContainerService.HintSize="484,246" sap2010:WorkflowViewState.IdRef="If_2">
                 <If.Then>
                   <Throw Exception="[New SystemException(&quot;Credentials may not be valid&quot;)]" sap:VirtualizedContainerService.HintSize="200,22" sap2010:WorkflowViewState.IdRef="Throw_2" />
                 </If.Then>
@@ -461,5 +464,6 @@
         </ActivityAction>
       </ui:OpenBrowser.Body>
     </ui:OpenBrowser>
+    <ui:LogMessage DisplayName="Log message (Login into ACME)" sap:VirtualizedContainerService.HintSize="602,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Succesfully logged into ACME site...&quot;]" />
   </Sequence>
 </Activity>

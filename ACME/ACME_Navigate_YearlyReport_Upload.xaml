@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Navigate_YearlyReport_Upload" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1199,764" sap2010:WorkflowViewState.IdRef="ACME_Navigate_YearlyReport_Upload_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Navigate_YearlyReport_Upload" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1199,1026" sap2010:WorkflowViewState.IdRef="ACME_Navigate_YearlyReport_Upload_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -62,14 +62,22 @@
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>UiPath.UIAutomationNext</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_Navigate_YearlyReport_Upload" sap:VirtualizedContainerService.HintSize="476,699" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ACME_Navigate_YearlyReport_Upload" sap:VirtualizedContainerService.HintSize="476,961" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Navigating to yearly report upload...&quot;]" />
     <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="ffb173a2-db24-43b4-af42-ce5e6bebe3c8" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="434,607" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
       <p:CVScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
@@ -125,7 +133,7 @@
         <uc:CvCacheContainer>
           <uc:CvCacheContainer.Caches>
             <scg:List x:TypeArguments="uc:CVCache" Capacity="2">
-              <uc:CVCache DisplayName="Screen CV Hover - 'Reports' (Main)" Id="ffb173a2-db24-43b4-af42-ce5e6bebe3c8" InformativeScreenshot="fdbdcc8a1e0da8acdf8148332ff776e3" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="a3a77382-e161-45bb-9cc0-ddd6e4ae9ac4" ServerVersion="1">
+              <uc:CVCache DisplayName="Reports" Id="ffb173a2-db24-43b4-af42-ce5e6bebe3c8" InformativeScreenshot="fdbdcc8a1e0da8acdf8148332ff776e3" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="a3a77382-e161-45bb-9cc0-ddd6e4ae9ac4" ServerVersion="1">
                 <uc:CVCache.CvAnchorRelations>
                   <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                 </uc:CVCache.CvAnchorRelations>
@@ -215,7 +223,7 @@
                   </scg:List>
                 </uc:CVCache.OcrTexts>
               </uc:CVCache>
-              <uc:CVCache DisplayName="Screen CV Click - 'Download Mo" Id="06e83237-50ca-4667-bf44-66cff0d8f01f" InformativeScreenshot="7352ca4bebbf032901415a80f70f226f" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks 8 Vendors Invoices Internal Invoices Reports Download Monthly Report Upload Yearly Report Students + Health Care" Position="367, 121" ServerVersion="1">
+              <uc:CVCache DisplayName="Download" Id="06e83237-50ca-4667-bf44-66cff0d8f01f" InformativeScreenshot="7352ca4bebbf032901415a80f70f226f" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks 8 Vendors Invoices Internal Invoices Reports Download Monthly Report Upload Yearly Report Students + Health Care" Position="367, 121" ServerVersion="1">
                 <uc:CVCache.CvAnchorRelations>
                   <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                 </uc:CVCache.CvAnchorRelations>
@@ -337,5 +345,6 @@
         <InArgument x:TypeArguments="x:Boolean" />
       </p:CVScope.UseLocalServer>
     </p:CVScope>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="434,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Navigated to yearly report upload...&quot;]" />
   </Sequence>
 </Activity>

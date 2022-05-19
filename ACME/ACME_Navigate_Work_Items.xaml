@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Navigate_Work_Items" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1199,790" sap2010:WorkflowViewState.IdRef="ACME_Navigate_Work_Items_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="ACME_Navigate_Work_Items" mva:VisualBasic.Settings="{x:Null}" sap:VirtualizedContainerService.HintSize="1199,1012" sap2010:WorkflowViewState.IdRef="ACME_Navigate_Work_Items_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -72,28 +72,35 @@
       <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
       <AssemblyReference>System.Reflection.Metadata</AssemblyReference>
       <AssemblyReference>System.Memory</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_Navigate_Work_Items" sap:VirtualizedContainerService.HintSize="510,725" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ACME_Navigate_Work_Items" sap:VirtualizedContainerService.HintSize="510,947" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="468,633" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f8018473a6490dcfe9e52fe9f066996a" Selector="&lt;html app='chrome.exe' title='ACME System 1 - *' /&gt;">
+    <ui:LogMessage DisplayName="Log message (Navigate to work items)" sap:VirtualizedContainerService.HintSize="468,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Navigating to work items...&quot;]" />
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Navigate to work items in ACME site" sap:VirtualizedContainerService.HintSize="468,593" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f8018473a6490dcfe9e52fe9f066996a" Selector="&lt;html app='chrome.exe' title='ACME System 1 - *' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="434,487" sap2010:WorkflowViewState.IdRef="CVScope_2" Version="V5">
+          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" DisplayName="CV Screen - ACME welcome" sap:VirtualizedContainerService.HintSize="434,447" sap2010:WorkflowViewState.IdRef="CVScope_2" Version="V5">
             <p:CVScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
                 </ActivityAction.Argument>
                 <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_6">
-                  <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Work Items' (151,335,91,16)&quot; +&#xA;&quot;Anchor: Text 'User options' (144,279,102,19)&quot;]" DesignTimeCacheId="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="400,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_2" InformativeScreenshot="aa86490ae9e9ab01720baafff5279308" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
+                  <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Work Items' (151,335,91,16)&quot; +&#xA;&quot;Anchor: Text 'User options' (144,279,102,19)&quot;]" DesignTimeCacheId="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" DesignTimeScaleFactor="1" DisplayName="CV Click on work items" sap:VirtualizedContainerService.HintSize="400,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_2" InformativeScreenshot="aa86490ae9e9ab01720baafff5279308" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
                     <p:CvClickWithDescriptor.CursorPosition>
                       <ui:CursorPosition Position="Center">
                         <ui:CursorPosition.OffsetX>
@@ -137,7 +144,7 @@
               <uc:CvCacheContainer>
                 <uc:CvCacheContainer.Caches>
                   <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
-                    <uc:CVCache DisplayName="Screen CV Click - 'User option (Main)" Id="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" InformativeScreenshot="21067dc254c2cf4e08981c0c39b33143" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="f0893149-0c1c-402b-adf4-304073d8c838" ServerVersion="1">
+                    <uc:CVCache DisplayName="ACME Welcome" Id="8e847f07-67ff-4df0-9a5d-ea34300c8d9a" InformativeScreenshot="21067dc254c2cf4e08981c0c39b33143" LogicalPosition="367, 121" OcrText="Dashboard Home / Dashboard Welcome, ruben.oliveros@e5.ai to System 1. If this is your first time logging in, please make sure to go to User Options -&gt; Reset Test Data User options Work Items Accounts Checks se Vendors Invoices Internal Invoices Reports Students + Health Care" Position="367, 121" ScreenshotGuid="f0893149-0c1c-402b-adf4-304073d8c838" ServerVersion="1">
                       <uc:CVCache.CvAnchorRelations>
                         <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                       </uc:CVCache.CvAnchorRelations>
@@ -253,5 +260,6 @@
         </ActivityAction>
       </ui:BrowserScope.Body>
     </ui:BrowserScope>
+    <ui:LogMessage DisplayName="Log message (Navigate to work items)" sap:VirtualizedContainerService.HintSize="468,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Successfully navigated to work items...&quot;]" />
   </Sequence>
 </Activity>

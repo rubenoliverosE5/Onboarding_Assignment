@@ -1,11 +1,11 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ACME_Vendor_Information" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="out_TaxID" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="Extracted TaxID from work item details" Name="out_TaxID" Type="OutArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1208,956</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1199,1087</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ACME_Vendor_Information_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="32">
@@ -44,7 +44,7 @@
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
-    <scg:List x:TypeArguments="AssemblyReference" Capacity="26">
+    <scg:List x:TypeArguments="AssemblyReference" Capacity="52">
       <AssemblyReference>System.Activities</AssemblyReference>
       <AssemblyReference>Microsoft.VisualBasic</AssemblyReference>
       <AssemblyReference>mscorlib</AssemblyReference>
@@ -71,27 +71,35 @@
       <AssemblyReference>UiPath.Testing.Activities</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Activities</AssemblyReference>
       <AssemblyReference>System.Runtime.Serialization</AssemblyReference>
+      <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
+      <AssemblyReference>System.ServiceModel</AssemblyReference>
+      <AssemblyReference>Microsoft.Bcl.AsyncInterfaces</AssemblyReference>
+      <AssemblyReference>System.ValueTuple</AssemblyReference>
+      <AssemblyReference>System.ComponentModel.Composition</AssemblyReference>
+      <AssemblyReference>NPOI</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_Vendor_Information" sap:VirtualizedContainerService.HintSize="552,891" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ACME_Vendor_Information" sap:VirtualizedContainerService.HintSize="552,1022" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="510,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Extracting TaxID&quot;]" />
     <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="510,799" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="f933559242aeda597c56b9878cd20c06" Selector="&lt;html app='chrome.exe' title='ACME System 1 - *' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="476,653" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Extracting TaxID" sap:VirtualizedContainerService.HintSize="476,653" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <sap:WorkflowViewStateService.ViewState>
               <scg:Dictionary x:TypeArguments="x:String, x:Object">
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="434,561" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+            <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DisplayName="CV Screen - Work items details" sap:VirtualizedContainerService.HintSize="434,561" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
               <p:CVScope.Body>
                 <ActivityAction x:TypeArguments="x:Object">
                   <ActivityAction.Argument>
@@ -101,7 +109,7 @@
                     <Sequence.Variables>
                       <Variable x:TypeArguments="x:String" Name="TaxIDInfo" />
                     </Sequence.Variables>
-                    <p:CvGetTextWithDescriptor Descriptor="[&quot;Target: AnyText (161,285,69,13)&quot; +&#xD;&#xA;&quot;Anchor: Text 'TaxID:' (115,285,43,13)&quot;]" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DesignTimeScaleFactor="1" DisplayName="CV Get Text - Any Text" sap:VirtualizedContainerService.HintSize="400,166" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_2" InformativeScreenshot="8f4d053462d845f311711a682981b70c" RefreshBefore="True" Result="[TaxIDInfo]" Version="V5">
+                    <p:CvGetTextWithDescriptor Descriptor="[&quot;Target: AnyText (161,285,69,13)&quot; +&#xA;&quot;Anchor: Text 'TaxID:' (115,285,43,13)&quot;]" DesignTimeCacheId="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" DesignTimeScaleFactor="1" DisplayName="CV Get Text - Any Text" sap:VirtualizedContainerService.HintSize="400,166" sap2010:WorkflowViewState.IdRef="CvGetTextWithDescriptor_2" InformativeScreenshot="8f4d053462d845f311711a682981b70c" RefreshBefore="True" Result="[TaxIDInfo]" Version="V5">
                       <p:CvGetTextWithDescriptor.DesignTimeDescriptor>
                         <uc:CvDescriptor Id="9744e060-3513-49c0-b0a5-8475267104e6">
                           <uc:CvDescriptor.Anchors>
@@ -126,11 +134,14 @@
                   </Sequence>
                 </ActivityAction>
               </p:CVScope.Body>
+              <p:CVScope.DesignTimeCache>
+                <uc:CVCache CvUiElements="{x:Null}" OcrTexts="{x:Null}" />
+              </p:CVScope.DesignTimeCache>
               <p:CVScope.DesignTimeCacheContainer>
                 <uc:CvCacheContainer>
                   <uc:CvCacheContainer.Caches>
                     <scg:List x:TypeArguments="uc:CVCache" Capacity="1">
-                      <uc:CVCache DisplayName="Screen CV Get Text - '' (Main)" Id="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" InformativeScreenshot="fca80f2e82418255a4de27237df48c81" LogicalPosition="375, 121" OcrText="Work Items - Work Item Details Home / Work Items Work Item Details Generate Yearly Report for Vendor Vendor Information Work Item Details TaxID: RO254678 WIID: 82792773 Name: Softload Export Type: Generate Yearly Report for Vendor Address: Strada Lunga 189 Status: Open City: Brasov, Romania Date: 2021-05-05 Update Work Item Copyright © 2022 ACME Systems" Position="375, 121" ScreenshotGuid="67168873-3e8c-4356-bf85-9d3227f10b57" ServerVersion="1">
+                      <uc:CVCache DisplayName="Work item details" Id="8bcf3ec9-3f8e-460a-8c29-faac5828e5b3" InformativeScreenshot="fca80f2e82418255a4de27237df48c81" LogicalPosition="375, 121" OcrText="Work Items - Work Item Details Home / Work Items Work Item Details Generate Yearly Report for Vendor Vendor Information Work Item Details TaxID: RO254678 WIID: 82792773 Name: Softload Export Type: Generate Yearly Report for Vendor Address: Strada Lunga 189 Status: Open City: Brasov, Romania Date: 2021-05-05 Update Work Item Copyright © 2022 ACME Systems" Position="375, 121" ScreenshotGuid="67168873-3e8c-4356-bf85-9d3227f10b57" ServerVersion="1">
                         <uc:CVCache.CvAnchorRelations>
                           <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="0" />
                         </uc:CVCache.CvAnchorRelations>

@@ -1,14 +1,14 @@
 <Activity mc:Ignorable="sap sap2010" x:Class="ACME_Yearly_Report" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:p="http://schemas.uipath.com/workflow/activities/cv" xmlns:p1="http://schemas.uipath.com/workflow/activities/ocr" xmlns:s="clr-namespace:System;assembly=mscorlib" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data" xmlns:sd1="clr-namespace:System.Drawing;assembly=System.Drawing" xmlns:uc="clr-namespace:UiPath.CV;assembly=UiPath.CV" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
-    <x:Property Name="in_Year" Type="InArgument(x:String)" />
-    <x:Property Name="in_TaxID" Type="InArgument(x:String)" />
-    <x:Property Name="out_YearlyReportPath" Type="OutArgument(x:String)" />
-    <x:Property Name="in_ReportsDownloadPath" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="The year of the monthly reports" Name="in_Year" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="TaxID obtained from vendor information" Name="in_TaxID" Type="InArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="The absolute path where the yearly report file is located" Name="out_YearlyReportPath" Type="OutArgument(x:String)" />
+    <x:Property sap2010:Annotation.AnnotationText="The route where the yearly report is going to be downloaded" Name="in_ReportsDownloadPath" Type="InArgument(x:String)" />
   </x:Members>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1199,3514</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1199,3816</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ACME_Yearly_Report_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
     <scg:List x:TypeArguments="x:String" Capacity="84">
@@ -102,9 +102,10 @@
       <AssemblyReference>UiPath.Excel.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.Vision.Core</AssemblyReference>
       <AssemblyReference>UiPath.OCR.Contracts</AssemblyReference>
+      <AssemblyReference>System.Runtime.WindowsRuntime</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence DisplayName="ACME_Yearly_Report" sap:VirtualizedContainerService.HintSize="1085,3449" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence DisplayName="ACME_Yearly_Report" sap:VirtualizedContainerService.HintSize="1085,3751" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_YearlyReport" />
       <Variable x:TypeArguments="s:String[]" Name="Months" />
@@ -114,6 +115,7 @@
         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1043,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Trace" Message="[&quot;Yearly report process started&quot;]" />
     <Assign sap:VirtualizedContainerService.HintSize="1043,60" sap2010:WorkflowViewState.IdRef="Assign_1">
       <Assign.To>
         <OutArgument x:TypeArguments="sd:DataTable">[dt_YearlyReport]</OutArgument>
@@ -122,20 +124,20 @@
         <InArgument x:TypeArguments="sd:DataTable">[New DataTable]</InArgument>
       </Assign.Value>
     </Assign>
-    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="1043,3002" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="78359c19a37b168ba1011c214f1ecdf4" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Download Monthly Report' /&gt;">
+    <ui:BrowserScope Browser="{x:Null}" SearchScope="{x:Null}" TimeoutMS="{x:Null}" UiBrowser="{x:Null}" BrowserType="Chrome" DisplayName="Attach Browser 'chrome.exe ACME'" sap:VirtualizedContainerService.HintSize="1043,3042" sap2010:WorkflowViewState.IdRef="BrowserScope_1" InformativeScreenshot="78359c19a37b168ba1011c214f1ecdf4" Selector="&lt;html app='chrome.exe' title='ACME System 1 - Download Monthly Report' /&gt;">
       <ui:BrowserScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="ContextTarget" />
           </ActivityAction.Argument>
-          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="679b77a5-05a1-4ed8-91f4-ae2c44264a40" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="1009,2856" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+          <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="679b77a5-05a1-4ed8-91f4-ae2c44264a40" DisplayName="CV Screen Scope 'DIV'" sap:VirtualizedContainerService.HintSize="1009,2896" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
             <p:CVScope.Body>
               <ActivityAction x:TypeArguments="x:Object">
                 <ActivityAction.Argument>
                   <DelegateInArgument x:TypeArguments="x:Object" Name="CVSessionData" />
                 </ActivityAction.Argument>
                 <Sequence DisplayName="Do" sap2010:WorkflowViewState.IdRef="Sequence_2">
-                  <p:CvTypeIntoWithDescriptor DeselectAfter="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (461,290,482,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Vendor TaxID:' (459,269,94,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Type Into - InputBox" EmptyField="True" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvTypeIntoWithDescriptor_1" InformativeScreenshot="a0f3c79cf92718674f000b86c1934914" Text="[in_TaxID]" Version="V5">
+                  <p:CvTypeIntoWithDescriptor DeselectAfter="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (461,290,482,36)&quot; +&#xA;&quot;Anchor: Text 'Vendor TaxID:' (459,269,94,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Type Into - InputBox" EmptyField="True" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvTypeIntoWithDescriptor_1" InformativeScreenshot="a0f3c79cf92718674f000b86c1934914" Text="[in_TaxID]" Version="V5">
                     <p:CvTypeIntoWithDescriptor.DesignTimeDescriptor>
                       <uc:CvDescriptor Id="6e1f8f2d-b69a-400f-a0a9-cf43bb871edb">
                         <uc:CvDescriptor.Anchors>
@@ -159,7 +161,7 @@
                       </ui:Target>
                     </p:CvTypeIntoWithDescriptor.Target>
                   </p:CvTypeIntoWithDescriptor>
-                  <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,432,223,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Year:' (458,412,36,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" EmptyField="False" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_1" InformativeScreenshot="a4ef647df98a59e9605ce9bb6ed601bf" Text="[in_Year]" Version="V5">
+                  <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,432,223,36)&quot; +&#xA;&quot;Anchor: Text 'Year:' (458,412,36,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" EmptyField="False" sap:VirtualizedContainerService.HintSize="975,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_1" InformativeScreenshot="a4ef647df98a59e9605ce9bb6ed601bf" Text="[in_Year]" Version="V5">
                     <p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
                       <uc:CvDescriptor Id="967c72f8-1883-4bfb-bb84-8e7cc0591309">
                         <uc:CvDescriptor.Anchors>
@@ -207,7 +209,7 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" EmptyField="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,364,221,36)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Month:' (459,343,47,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" sap:VirtualizedContainerService.HintSize="897,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_2" InformativeScreenshot="394b33a9c87bd234051ec335094ab816" Text="[month.ToString]" Version="V5">
+                          <p:CvSelectItemWithDescriptor DeselectAfter="{x:Null}" EmptyField="{x:Null}" InRegion="{x:Null}" SendWindowMessages="{x:Null}" SimulateType="{x:Null}" Activate="True" ClickBeforeTyping="True" Descriptor="[&quot;Target: InputBox (459,364,221,36)&quot; +&#xA;&quot;Anchor: Text 'Month:' (459,343,47,13)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Dropdown Select - InputBox" sap:VirtualizedContainerService.HintSize="897,184" sap2010:WorkflowViewState.IdRef="CvSelectItemWithDescriptor_2" InformativeScreenshot="394b33a9c87bd234051ec335094ab816" Text="[month.ToString]" Version="V5">
                             <p:CvSelectItemWithDescriptor.DesignTimeDescriptor>
                               <uc:CvDescriptor Id="e6bbeafb-2e8e-4748-82ae-f4695dd16131">
                                 <uc:CvDescriptor.Anchors>
@@ -231,7 +233,7 @@
                               </ui:Target>
                             </p:CvSelectItemWithDescriptor.Target>
                           </p:CvSelectItemWithDescriptor>
-                          <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Download Report' (472,493,111,16)&quot; +&#xD;&#xA;&quot;Anchor: Text 'Copyright © 2022 ACME Systems' (459,611,211,16)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_1" InformativeScreenshot="5c1d7b5a86149371a06956832768f802" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
+                          <p:CvClickWithDescriptor DelayBefore="{x:Null}" DelayMS="{x:Null}" SendWindowMessages="{x:Null}" SimulateClick="{x:Null}" ClickType="CLICK_SINGLE" Descriptor="[&quot;Target: Text 'Download Report' (472,493,111,16)&quot; +&#xA;&quot;Anchor: Text 'Copyright © 2022 ACME Systems' (459,611,211,16)&quot;]" DesignTimeCacheId="349690f4-4a9c-42ab-abbc-02417bbb3abc" DesignTimeScaleFactor="1" DisplayName="CV Click - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvClickWithDescriptor_1" InformativeScreenshot="5c1d7b5a86149371a06956832768f802" KeyModifiers="None" MouseButton="BTN_LEFT" Version="V5">
                             <p:CvClickWithDescriptor.CursorPosition>
                               <ui:CursorPosition Position="Center">
                                 <ui:CursorPosition.OffsetX>
@@ -265,7 +267,7 @@
                               </ui:Target>
                             </p:CvClickWithDescriptor.Target>
                           </p:CvClickWithDescriptor>
-                          <p:CvElementExistsWithDescriptor Descriptor="[&quot;Target: Text 'No report found for this vendor / month / year that you have specified.' (751,45,408,16)&quot; +&#xD;&#xA;&quot;Anchor: Text 'acme-test.uipath.com says' (750,16,177,17)&quot;]" DesignTimeCacheId="a4209172-472a-46ed-970f-8d25893a0c3c" DesignTimeScaleFactor="1" DisplayName="CV Element Exists - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvElementExistsWithDescriptor_3" InformativeScreenshot="6f4de6065094839e94c4b8dd6f55f5ab" Result="[NoReportFound]" Version="V5">
+                          <p:CvElementExistsWithDescriptor Descriptor="[&quot;Target: Text 'No report found for this vendor / month / year that you have specified.' (751,45,408,16)&quot; +&#xA;&quot;Anchor: Text 'acme-test.uipath.com says' (750,16,177,17)&quot;]" DesignTimeCacheId="a4209172-472a-46ed-970f-8d25893a0c3c" DesignTimeScaleFactor="1" DisplayName="CV Element Exists - Text" sap:VirtualizedContainerService.HintSize="897,136" sap2010:WorkflowViewState.IdRef="CvElementExistsWithDescriptor_3" InformativeScreenshot="6f4de6065094839e94c4b8dd6f55f5ab" Result="[NoReportFound]" Version="V5">
                             <p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
                               <uc:CvDescriptor Id="09a34c26-d756-4ad0-94a0-92305d31a953">
                                 <uc:CvDescriptor.Anchors>
@@ -279,7 +281,7 @@
                               </uc:CvDescriptor>
                             </p:CvElementExistsWithDescriptor.DesignTimeDescriptor>
                           </p:CvElementExistsWithDescriptor>
-                          <If Condition="[NoReportFound]" sap:VirtualizedContainerService.HintSize="897,1254" sap2010:WorkflowViewState.IdRef="If_4">
+                          <If Condition="[NoReportFound]" DisplayName="If No report screen exists" sap:VirtualizedContainerService.HintSize="897,1254" sap2010:WorkflowViewState.IdRef="If_4">
                             <If.Then>
                               <Sequence sap:VirtualizedContainerService.HintSize="376,228" sap2010:WorkflowViewState.IdRef="Sequence_9">
                                 <sap:WorkflowViewStateService.ViewState>
@@ -722,7 +724,7 @@
                         </scg:List>
                       </uc:CVCache.OcrTexts>
                     </uc:CVCache>
-                    <uc:CVCache DisplayName="Main Screen 2" Id="349690f4-4a9c-42ab-abbc-02417bbb3abc" InformativeScreenshot="3959178b48c00bf7b8897df308c70918" LogicalPosition="729, 62" OcrText="ACME System 1 Home Switch to new theme Log Out Reports - Download Monthly Report Home / Reports - Download Monthly Report Please fill in the following form to be able to download a specific Vendor Monthly Report. Vendor TaxID: Month: --- Year: Download Report Copyright © 2022 ACME Systems" Position="729, 62" ScreenshotGuid="e4d71758-8de3-4491-b70f-b20786e90198" ServerVersion="1">
+                    <uc:CVCache DisplayName="Main Screen" Id="349690f4-4a9c-42ab-abbc-02417bbb3abc" InformativeScreenshot="3959178b48c00bf7b8897df308c70918" LogicalPosition="729, 62" OcrText="ACME System 1 Home Switch to new theme Log Out Reports - Download Monthly Report Home / Reports - Download Monthly Report Please fill in the following form to be able to download a specific Vendor Monthly Report. Vendor TaxID: Month: --- Year: Download Report Copyright © 2022 ACME Systems" Position="729, 62" ScreenshotGuid="e4d71758-8de3-4491-b70f-b20786e90198" ServerVersion="1">
                       <uc:CVCache.CvAnchorRelations>
                         <scg:List x:TypeArguments="uc:AnchorRelationInfo" Capacity="4">
                           <uc:AnchorRelationInfo Target="0">
@@ -887,5 +889,6 @@
       </Assign.Value>
     </Assign>
     <ui:WriteRange AddHeaders="False" DataTable="[dt_YearlyReport]" DisplayName="Write Range" sap:VirtualizedContainerService.HintSize="1043,115" sap2010:WorkflowViewState.IdRef="WriteRange_1" SheetName="Sheet1" StartingCell="A1" WorkbookPath="[out_YearlyReportPath]" />
+    <ui:LogMessage DisplayName="Log Message" sap:VirtualizedContainerService.HintSize="1043,91" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Trace" Message="[&quot;Yearly report process ended&quot;]" />
   </Sequence>
 </Activity>
