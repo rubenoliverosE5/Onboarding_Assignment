@@ -2,38 +2,34 @@
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Transaction item to be processed." Name="in_TransactionItem" Type="InArgument(x:String)" />
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="in_Config" Type="InArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_HookPassword" Type="InArgument(ss:SecureString)" />
-    <x:Property Name="in_HookURL" Type="InArgument(x:String)" />
-    <x:Property Name="in_HookUserName" Type="InArgument(x:String)" />
     <x:Property Name="in_ProcessName" Type="InArgument(x:String)" />
     <x:Property Name="in_TaskName" Type="InArgument(x:String)" />
-    <x:Property Name="SummaryMessage" Type="InArgument(x:String)" />
+    <x:Property Name="in_ClientName" Type="InArgument(x:String)" />
+    <x:Property Name="in_ProcessID" Type="InArgument(x:String)" />
+    <x:Property Name="in_SummaryFieldNames" Type="InArgument(scg:List(x:String))" />
   </x:Members>
-  <this:Process.in_HookPassword>
-    <InArgument x:TypeArguments="ss:SecureString" />
-  </this:Process.in_HookPassword>
-  <this:Process.in_HookURL>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Process.in_HookURL>
-  <this:Process.in_HookUserName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:Process.in_HookUserName>
   <this:Process.in_ProcessName>
     <InArgument x:TypeArguments="x:String" />
   </this:Process.in_ProcessName>
   <this:Process.in_TaskName>
     <InArgument x:TypeArguments="x:String" />
   </this:Process.in_TaskName>
-  <this:Process.SummaryMessage>
+  <this:Process.in_ClientName>
     <InArgument x:TypeArguments="x:String" />
-  </this:Process.SummaryMessage>
+  </this:Process.in_ClientName>
+  <this:Process.in_ProcessID>
+    <InArgument x:TypeArguments="x:String" />
+  </this:Process.in_ProcessID>
+  <this:Process.in_SummaryFieldNames>
+    <InArgument x:TypeArguments="scg:List(x:String)" />
+  </this:Process.in_SummaryFieldNames>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1028,7451</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1028,7375</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>ProcessTransaction_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="110">
+    <scg:List x:TypeArguments="x:String" Capacity="56">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -142,7 +138,7 @@
       <AssemblyReference>UiPath.Web.Activities</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="949,7386" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Invoke major steps of the business process, which are usually implemented by multiple subworkflows.&#xA;&#xA;If a BusinessRuleException is thrown, the transaction is skipped. &#xA;If another kind of exception occurs, the current transaction can be retried. " DisplayName="Process" sap:VirtualizedContainerService.HintSize="949,7310" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="x:Boolean" Name="WorkItemsPageExist" />
       <Variable x:TypeArguments="sd:DataTable" Name="dt_WorkItems" />
@@ -150,9 +146,11 @@
       <Variable x:TypeArguments="x:String" Name="TaxID" />
       <Variable x:TypeArguments="x:String" Name="UploadID" />
       <Variable x:TypeArguments="x:String" Name="YearlyReportPath" />
-      <Variable x:TypeArguments="sd:DataTable" Name="dt_EmailReport" />
+      <Variable x:TypeArguments="sd:DataTable" Name="dt_FinalReport" />
       <Variable x:TypeArguments="s:String[]" Name="FieldNames" />
       <Variable x:TypeArguments="x:String" Name="SummaryResultJson" />
+      <Variable x:TypeArguments="x:String" Name="ResultRecords" />
+      <Variable x:TypeArguments="x:String" Name="SummaryMessage" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -162,7 +160,7 @@
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message Process Start" sap:VirtualizedContainerService.HintSize="907,91" sap2010:WorkflowViewState.IdRef="LogMessage_1" Level="Info" Message="[&quot;Started Process&quot;]" />
     <ui:Comment DisplayName="Comment (placeholder)" sap:VirtualizedContainerService.HintSize="907,55" sap2010:WorkflowViewState.IdRef="Comment_1" Text="//  Invoke steps of the process" />
-    <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="658e8e31-130b-4382-b0d5-2dd22ede7f41" DisplayName="CV Screen- Work Items" sap:VirtualizedContainerService.HintSize="907,6515" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
+    <p:CVScope ContinueOnError="{x:Null}" DelayBefore="{x:Null}" Server="{x:Null}" CvMethod="ElementDetection, OCR" DesignTimeCacheId="658e8e31-130b-4382-b0d5-2dd22ede7f41" DisplayName="CV Screen- Work Items" sap:VirtualizedContainerService.HintSize="907,6284" sap2010:WorkflowViewState.IdRef="CVScope_1" Version="V5">
       <p:CVScope.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
@@ -173,11 +171,8 @@
               <Variable x:TypeArguments="ss:SecureString" Name="EmailPassword" />
               <Variable x:TypeArguments="x:String" Name="EmailUsername" />
               <Variable x:TypeArguments="ss:SecureString" Default="[new System.Net.NetworkCredential(string.Empty, &quot;HkSeS1mgm00d&quot;).SecurePassword]" Name="HookPassword" />
-              <Variable x:TypeArguments="x:String" Name="ClientName" />
               <Variable x:TypeArguments="x:String" Name="DeepLink" />
               <Variable x:TypeArguments="njl:JObject" Name="FlowConfig" />
-              <Variable x:TypeArguments="x:String" Name="ProcessID" />
-              <Variable x:TypeArguments="scg:List(x:String)" Name="SummaryFieldNames" />
               <Variable x:TypeArguments="x:String" Name="TaskRunID" />
               <Variable x:TypeArguments="njl:JObject" Name="SummaryResult" />
             </Sequence.Variables>
@@ -390,7 +385,7 @@
                         <InArgument x:TypeArguments="x:String" x:Key="in_Status">C</InArgument>
                       </ui:InvokeWorkflowFile.Arguments>
                     </ui:InvokeWorkflowFile>
-                    <If Condition="[dt_EmailReport is Nothing]" sap:VirtualizedContainerService.HintSize="797,533" sap2010:WorkflowViewState.IdRef="If_7">
+                    <If Condition="[dt_FinalReport is Nothing]" sap:VirtualizedContainerService.HintSize="797,533" sap2010:WorkflowViewState.IdRef="If_7">
                       <If.Then>
                         <Sequence sap:VirtualizedContainerService.HintSize="376,376" sap2010:WorkflowViewState.IdRef="Sequence_16">
                           <sap:WorkflowViewStateService.ViewState>
@@ -398,8 +393,8 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:BuildDataTable DataTable="[dt_EmailReport]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;WIID&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Description&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;TaxID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;UploadID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;UploadStatus&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Reason&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;WIID&quot;),row(&quot;Description&quot;),row(&quot;Type&quot;),row(&quot;Date&quot;),TaxID,UploadID,&quot;Completed&quot;,&quot;Uploaded with ID &quot; + UploadID}]" DataTable="[dt_EmailReport]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
+                          <ui:BuildDataTable DataTable="[dt_FinalReport]" DisplayName="Build Data Table" sap:VirtualizedContainerService.HintSize="334,59" sap2010:WorkflowViewState.IdRef="BuildDataTable_2" TableInfo="&lt;NewDataSet&gt;&#xA;  &lt;xs:schema id=&quot;NewDataSet&quot; xmlns=&quot;&quot; xmlns:xs=&quot;http://www.w3.org/2001/XMLSchema&quot; xmlns:msdata=&quot;urn:schemas-microsoft-com:xml-msdata&quot;&gt;&#xA;    &lt;xs:element name=&quot;NewDataSet&quot; msdata:IsDataSet=&quot;true&quot; msdata:MainDataTable=&quot;TableName&quot; msdata:UseCurrentLocale=&quot;true&quot;&gt;&#xA;      &lt;xs:complexType&gt;&#xA;        &lt;xs:choice minOccurs=&quot;0&quot; maxOccurs=&quot;unbounded&quot;&gt;&#xA;          &lt;xs:element name=&quot;TableName&quot;&gt;&#xA;            &lt;xs:complexType&gt;&#xA;              &lt;xs:sequence&gt;&#xA;                &lt;xs:element name=&quot;WIID&quot; msdata:Caption=&quot;&quot; minOccurs=&quot;0&quot;&gt;&#xA;                  &lt;xs:simpleType&gt;&#xA;                    &lt;xs:restriction base=&quot;xs:string&quot;&gt;&#xA;                      &lt;xs:maxLength value=&quot;100&quot; /&gt;&#xA;                    &lt;/xs:restriction&gt;&#xA;                  &lt;/xs:simpleType&gt;&#xA;                &lt;/xs:element&gt;&#xA;                &lt;xs:element name=&quot;Description&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Type&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Date&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;TaxID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;UploadID&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;UploadStatus&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Status&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;                &lt;xs:element name=&quot;Reason&quot; msdata:Caption=&quot;&quot; type=&quot;xs:string&quot; minOccurs=&quot;0&quot; /&gt;&#xA;              &lt;/xs:sequence&gt;&#xA;            &lt;/xs:complexType&gt;&#xA;          &lt;/xs:element&gt;&#xA;        &lt;/xs:choice&gt;&#xA;      &lt;/xs:complexType&gt;&#xA;    &lt;/xs:element&gt;&#xA;  &lt;/xs:schema&gt;&#xA;&lt;/NewDataSet&gt;" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;WIID&quot;),row(&quot;Description&quot;),row(&quot;Type&quot;),row(&quot;Date&quot;),TaxID,UploadID,&quot;Completed&quot;,&quot;Uploaded with ID &quot; + UploadID}]" DataTable="[dt_FinalReport]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_3" />
                         </Sequence>
                       </If.Then>
                       <If.Else>
@@ -409,7 +404,7 @@
                               <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                             </scg:Dictionary>
                           </sap:WorkflowViewStateService.ViewState>
-                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;WIID&quot;),row(&quot;Description&quot;),row(&quot;Type&quot;),row(&quot;Date&quot;),TaxID,UploadID,&quot;Completed&quot;,&quot;Uploaded with ID &quot; + UploadID}]" DataTable="[dt_EmailReport]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
+                          <ui:AddDataRow DataRow="{x:Null}" ArrayRow="[{row(&quot;WIID&quot;),row(&quot;Description&quot;),row(&quot;Type&quot;),row(&quot;Date&quot;),TaxID,UploadID,&quot;Completed&quot;,&quot;Uploaded with ID &quot; + UploadID}]" DataTable="[dt_FinalReport]" DisplayName="Add Data Row" sap:VirtualizedContainerService.HintSize="334,185" sap2010:WorkflowViewState.IdRef="AddDataRow_4" />
                         </Sequence>
                       </If.Else>
                     </If>
@@ -422,7 +417,6 @@
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
             </ui:ForEachRow>
-            <euhe:Begin_Task_Execution ClientName="[ClientName]" DeepLink="[DeepLink]" DisplayName="Begin Task Execution" FlowConfig="[FlowConfig]" sap:VirtualizedContainerService.HintSize="873,344" HookPassword="[in_HookPassword]" HookURL="[in_HookURL]" HookUserName="[in_HookUserName]" sap2010:WorkflowViewState.IdRef="Begin_Task_Execution_2" ProcessIdentifier="[ProcessID]" ProcessName="[in_ProcessName]" SummaryFieldNames="[SummaryFieldNames]" TaskName="[in_TaskName]" TaskRunIdentifier="[TaskRunID]" __Prefix="[IO.Directory.GetCurrentDirectory]" />
             <Sequence DisplayName="Log Outputs" sap:VirtualizedContainerService.HintSize="873,658" sap2010:WorkflowViewState.IdRef="Sequence_19">
               <sap:WorkflowViewStateService.ViewState>
                 <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -430,14 +424,14 @@
                   <x:Boolean x:Key="IsPinned">False</x:Boolean>
                 </scg:Dictionary>
               </sap:WorkflowViewStateService.ViewState>
-              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[ClientName]" />
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_1" Text="[in_ClientName]" />
               <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_2" Text="[DeepLink]" />
               <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_3" Text="[FlowConfig.ToString]" />
-              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[ProcessID]" />
-              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[SummaryFieldNames.ToArray.ToString]" />
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_4" Text="[in_ProcessID]" />
+              <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_5" Text="[in_SummaryFieldNames.ToArray.ToString]" />
               <WriteLine DisplayName="Write Line" sap:VirtualizedContainerService.HintSize="230,61" sap2010:WorkflowViewState.IdRef="WriteLine_6" Text="[TaskRunID]" />
             </Sequence>
-            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="873,162" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
+            <ui:MultipleAssign DisplayName="Multiple Assign" sap:VirtualizedContainerService.HintSize="873,193" sap2010:WorkflowViewState.IdRef="MultipleAssign_1">
               <ui:MultipleAssign.AssignOperations>
                 <scg:List x:TypeArguments="ui:AssignOperation" Capacity="4">
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_1">
@@ -445,7 +439,7 @@
                       <OutArgument x:TypeArguments="x:String">[SummaryMessage]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="x:String">Total Records Processed: 2 / Success: 1 / Failure: 1 / Skipped: 0</InArgument>
+                      <InArgument x:TypeArguments="x:String">Total Records Processed: {Processed} / Success: {Success} / Failure: {Faulire} / Skipped: {Skipped}</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_2">
@@ -453,7 +447,7 @@
                       <OutArgument x:TypeArguments="s:String[]">[FieldNames]</OutArgument>
                     </ui:AssignOperation.To>
                     <ui:AssignOperation.Value>
-                      <InArgument x:TypeArguments="s:String[]">[SummaryFieldNames.ToArray]</InArgument>
+                      <InArgument x:TypeArguments="s:String[]">[in_SummaryFieldNames.ToArray]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
                   <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_3">
@@ -464,23 +458,31 @@
                       <InArgument x:TypeArguments="njl:JObject">[New Newtonsoft.Json.Linq.JObject]</InArgument>
                     </ui:AssignOperation.Value>
                   </ui:AssignOperation>
+                  <ui:AssignOperation sap2010:WorkflowViewState.IdRef="AssignOperation_4">
+                    <ui:AssignOperation.To>
+                      <OutArgument x:TypeArguments="x:String">[ResultRecords]</OutArgument>
+                    </ui:AssignOperation.To>
+                    <ui:AssignOperation.Value>
+                      <InArgument x:TypeArguments="x:String">[JsonConvert.SerializeObject(dt_FinalReport)]</InArgument>
+                    </ui:AssignOperation.Value>
+                  </ui:AssignOperation>
                 </scg:List>
               </ui:MultipleAssign.AssignOperations>
             </ui:MultipleAssign>
-            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="873,418" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[FieldNames]">
+            <ui:ForEach x:TypeArguments="x:String" CurrentIndex="{x:Null}" DisplayName="For Each" sap:VirtualizedContainerService.HintSize="873,524" sap2010:WorkflowViewState.IdRef="ForEach`1_2" Values="[FieldNames]">
               <ui:ForEach.Body>
                 <ActivityAction x:TypeArguments="x:String">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="x:String" Name="item" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="538,295" sap2010:WorkflowViewState.IdRef="Sequence_20">
+                  <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="538,401" sap2010:WorkflowViewState.IdRef="Sequence_20">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                         <x:Boolean x:Key="IsPinned">False</x:Boolean>
                       </scg:Dictionary>
                     </sap:WorkflowViewStateService.ViewState>
-                    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.ToString.ToLower]" sap:VirtualizedContainerService.HintSize="496,203" sap2010:WorkflowViewState.IdRef="Switch`1_1">
+                    <Switch x:TypeArguments="x:String" DisplayName="Switch" Expression="[item.ToString.ToLower]" sap:VirtualizedContainerService.HintSize="496,309" sap2010:WorkflowViewState.IdRef="Switch`1_1">
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
                           <x:Boolean x:Key="IsPinned">False</x:Boolean>
@@ -492,7 +494,7 @@
                           <OutArgument x:TypeArguments="njl:JToken">[SummaryResult("Total")]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="njl:JToken">[2]</InArgument>
+                          <InArgument x:TypeArguments="njl:JToken">[dt_FinalReport.Rows.Count]</InArgument>
                         </Assign.Value>
                       </Assign>
                       <Assign x:Key="success" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_4">
@@ -500,7 +502,7 @@
                           <OutArgument x:TypeArguments="njl:JToken">[SummaryResult("Success")]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="njl:JToken">[1]</InArgument>
+                          <InArgument x:TypeArguments="njl:JToken">[dt_FinalReport.AsEnumerable().Count(Function (r as DataRow) r("Status") is item)]</InArgument>
                         </Assign.Value>
                       </Assign>
                       <Assign x:Key="failure" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_5">
@@ -508,7 +510,7 @@
                           <OutArgument x:TypeArguments="njl:JToken">[SummaryResult("Failure")]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="njl:JToken">[1]</InArgument>
+                          <InArgument x:TypeArguments="njl:JToken">[dt_FinalReport.AsEnumerable().Count(Function (r as DataRow) r("Status") is item)]</InArgument>
                         </Assign.Value>
                       </Assign>
                       <Assign x:Key="skipped" sap:VirtualizedContainerService.HintSize="262,60" sap2010:WorkflowViewState.IdRef="Assign_6">
@@ -516,7 +518,7 @@
                           <OutArgument x:TypeArguments="njl:JToken">[SummaryResult("Skipped")]</OutArgument>
                         </Assign.To>
                         <Assign.Value>
-                          <InArgument x:TypeArguments="njl:JToken">[0]</InArgument>
+                          <InArgument x:TypeArguments="njl:JToken">[dt_FinalReport.AsEnumerable().Count(Function (r as DataRow) r("Status") is item)]</InArgument>
                         </Assign.Value>
                       </Assign>
                     </Switch>
@@ -950,7 +952,7 @@
         <InArgument x:TypeArguments="x:Boolean" />
       </p:CVScope.UseLocalServer>
     </p:CVScope>
-    <TryCatch DisplayName="End Task" sap:VirtualizedContainerService.HintSize="907,310" sap2010:WorkflowViewState.IdRef="TryCatch_1">
+    <TryCatch DisplayName="End Task" sap:VirtualizedContainerService.HintSize="907,465" sap2010:WorkflowViewState.IdRef="TryCatch_1">
       <sap:WorkflowViewStateService.ViewState>
         <scg:Dictionary x:TypeArguments="x:String, x:Object">
           <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -958,7 +960,7 @@
         </scg:Dictionary>
       </sap:WorkflowViewStateService.ViewState>
       <TryCatch.Try>
-        <euhe:End_Task_Execution DisplayName="End Task Execution" sap:VirtualizedContainerService.HintSize="284,238" sap2010:WorkflowViewState.IdRef="End_Task_Execution_1" SummaryResultObject="[IF(String.IsNullOrEmpty(SummaryResultJson),&quot;{}&quot;,SummaryResultJson)]" TaskResult="[SummaryResultJson]" TaskResultSummary="[SummaryMessage]" TaskRunStatus="Completed" __Prefix="[IO.Directory.GetCurrentDirectory]">
+        <euhe:End_Task_Execution DisplayName="End Task Execution" sap:VirtualizedContainerService.HintSize="284,238" sap2010:WorkflowViewState.IdRef="End_Task_Execution_1" SummaryResultObject="[IF(String.IsNullOrEmpty(SummaryResultJson),&quot;{}&quot;,SummaryResultJson)]" TaskResult="[ResultRecords]" TaskResultSummary="[SummaryMessage]" TaskRunStatus="Completed" __Prefix="[IO.Directory.GetCurrentDirectory]">
           <euhe:End_Task_Execution.FailureReason>
             <InArgument x:TypeArguments="x:String">
               <Literal x:TypeArguments="x:String" Value="" />
@@ -967,10 +969,10 @@
         </euhe:End_Task_Execution>
       </TryCatch.Try>
       <TryCatch.Catches>
-        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="400,148" sap2010:WorkflowViewState.IdRef="Catch`1_1">
+        <Catch x:TypeArguments="s:Exception" sap:VirtualizedContainerService.HintSize="404,21" sap2010:WorkflowViewState.IdRef="Catch`1_1">
           <sap:WorkflowViewStateService.ViewState>
             <scg:Dictionary x:TypeArguments="x:String, x:Object">
-              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+              <x:Boolean x:Key="IsExpanded">False</x:Boolean>
               <x:Boolean x:Key="IsPinned">False</x:Boolean>
             </scg:Dictionary>
           </sap:WorkflowViewStateService.ViewState>
