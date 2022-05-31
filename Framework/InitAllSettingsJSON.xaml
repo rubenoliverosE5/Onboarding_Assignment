@@ -1,40 +1,30 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="InitiAllSettings" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="InitiAllSettings" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:euhe="clr-namespace:Element5_Core.Utils.Hooks.Execution_Hooks;assembly=Element5.Core" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:mva="clr-namespace:Microsoft.VisualBasic.Activities;assembly=System.Activities" xmlns:njl="clr-namespace:Newtonsoft.Json.Linq;assembly=Newtonsoft.Json" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=mscorlib" xmlns:ss="clr-namespace:System.Security;assembly=mscorlib" xmlns:this="clr-namespace:" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <x:Members>
     <x:Property sap2010:Annotation.AnnotationText="Dictionary structure to store configuration data of the process (settings, constants and assets)." Name="out_Config" Type="OutArgument(scg:Dictionary(x:String, x:Object))" />
-    <x:Property Name="in_HookPassword" Type="InArgument(ss:SecureString)" />
     <x:Property Name="in_HookURL" Type="InArgument(x:String)" />
-    <x:Property Name="in_HookUserName" Type="InArgument(x:String)" />
     <x:Property Name="in_ProcessName" Type="InArgument(x:String)" />
     <x:Property Name="in_TaskName" Type="InArgument(x:String)" />
     <x:Property Name="out_ClientName" Type="OutArgument(x:String)" />
     <x:Property Name="out_ProcessID" Type="OutArgument(x:String)" />
-    <x:Property Name="out_SummaryFieldNames" Type="InArgument(scg:List(x:String))" />
+    <x:Property Name="out_SummaryFieldNames" Type="OutArgument(scg:List(x:String))" />
+    <x:Property Name="out_FlowConfig" Type="OutArgument(njl:JObject)" />
   </x:Members>
-  <this:InitiAllSettings.in_HookPassword>
-    <InArgument x:TypeArguments="ss:SecureString" />
-  </this:InitiAllSettings.in_HookPassword>
   <this:InitiAllSettings.in_HookURL>
     <InArgument x:TypeArguments="x:String" />
   </this:InitiAllSettings.in_HookURL>
-  <this:InitiAllSettings.in_HookUserName>
-    <InArgument x:TypeArguments="x:String" />
-  </this:InitiAllSettings.in_HookUserName>
   <this:InitiAllSettings.in_ProcessName>
     <InArgument x:TypeArguments="x:String" />
   </this:InitiAllSettings.in_ProcessName>
   <this:InitiAllSettings.in_TaskName>
     <InArgument x:TypeArguments="x:String" />
   </this:InitiAllSettings.in_TaskName>
-  <this:InitiAllSettings.out_SummaryFieldNames>
-    <InArgument x:TypeArguments="scg:List(x:String)" />
-  </this:InitiAllSettings.out_SummaryFieldNames>
   <mva:VisualBasic.Settings>
     <x:Null />
   </mva:VisualBasic.Settings>
-  <sap:VirtualizedContainerService.HintSize>1028,738</sap:VirtualizedContainerService.HintSize>
+  <sap:VirtualizedContainerService.HintSize>1028,1265</sap:VirtualizedContainerService.HintSize>
   <sap2010:WorkflowViewState.IdRef>GetAllSettings_1</sap2010:WorkflowViewState.IdRef>
   <TextExpression.NamespacesForImplementation>
-    <scg:List x:TypeArguments="x:String" Capacity="42">
+    <scg:List x:TypeArguments="x:String" Capacity="84">
       <x:String>System.Activities</x:String>
       <x:String>System.Activities.Statements</x:String>
       <x:String>System.Activities.Expressions</x:String>
@@ -77,6 +67,7 @@
       <x:String>System.Net</x:String>
       <x:String>Microsoft.VisualBasic.CompilerServices</x:String>
       <x:String>UiPath.Web</x:String>
+      <x:String>Element5_Core.Utils.Hooks.Execution_Hooks.Optimization</x:String>
     </scg:List>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -121,11 +112,13 @@
       <AssemblyReference>UiPath.Web</AssemblyReference>
     </scg:List>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Initialize, populate and output a configuration Dictionary to be used throughout the project. &#xA;Settings and constants are read from the local configuration file, and assets are fetched from Orchestrator. &#xA;Asset values overwrite settings and constant values if they are defined with the same name." DisplayName="Initialize All Settings JSON" sap:VirtualizedContainerService.HintSize="376,416" sap2010:WorkflowViewState.IdRef="Sequence_2">
+  <Sequence sap2010:Annotation.AnnotationText="Initialize, populate and output a configuration Dictionary to be used throughout the project. &#xA;Settings and constants are read from the local configuration file, and assets are fetched from Orchestrator. &#xA;Asset values overwrite settings and constant values if they are defined with the same name." DisplayName="Initialize All Settings JSON" sap:VirtualizedContainerService.HintSize="376,1200" sap2010:WorkflowViewState.IdRef="Sequence_2">
     <Sequence.Variables>
-      <Variable x:TypeArguments="njl:JObject" Name="FlowConfig" />
       <Variable x:TypeArguments="x:String" Name="DeepLink" />
       <Variable x:TypeArguments="x:String" Name="TaskID" />
+      <Variable x:TypeArguments="x:String" Name="ClientName" />
+      <Variable x:TypeArguments="x:String" Name="HookUserName" />
+      <Variable x:TypeArguments="ss:SecureString" Name="HookPassword" />
     </Sequence.Variables>
     <sap:WorkflowViewStateService.ViewState>
       <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -134,6 +127,9 @@
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
     <ui:LogMessage DisplayName="Log Message (Initialize All Settings)" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_5" Level="Trace" Message="[&quot;Initializing settings from Json file...&quot;]" />
+    <ui:GetRobotCredential TimeoutMS="{x:Null}" AssetName="HookCredentials" DisplayName="Get Credential" sap:VirtualizedContainerService.HintSize="334,180" sap2010:WorkflowViewState.IdRef="GetRobotCredential_1" Password="[HookPassword]" Username="[HookUserName]" />
+    <euhe:Begin_Task_Execution ClientName="[out_ClientName]" DeepLink="[DeepLink]" DisplayName="Begin Task Execution" FlowConfig="[out_FlowConfig]" sap:VirtualizedContainerService.HintSize="334,344" HookPassword="[HookPassword]" HookURL="[in_HookURL]" HookUserName="[HookUserName]" sap2010:WorkflowViewState.IdRef="Begin_Task_Execution_5" ProcessIdentifier="[out_ProcessID]" ProcessName="Generate Yearly Report" SummaryFieldNames="[out_SummaryFieldNames]" TaskName="Generate Yearly Report" TaskRunIdentifier="[TaskID]" __Prefix="[IO.Directory.GetCurrentDirectory]" />
+    <ui:DeserializeJson x:TypeArguments="scg:Dictionary(x:String, x:Object)" DisplayName="Deserialize JSON" sap:VirtualizedContainerService.HintSize="334,60" sap2010:WorkflowViewState.IdRef="DeserializeJson`1_1" JsonObject="[out_Config]" JsonString="[out_FlowConfig.ToString]" />
     <ui:LogMessage DisplayName="Log Message (Initialize All Settings)" sap:VirtualizedContainerService.HintSize="334,91" sap2010:WorkflowViewState.IdRef="LogMessage_6" Level="Trace" Message="[&quot;Settings initialized from Json file...&quot;]" />
   </Sequence>
 </Activity>
